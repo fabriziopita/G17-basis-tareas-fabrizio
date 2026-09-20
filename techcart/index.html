@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TechCart - Tienda electrónica</title>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+    <header>
+        <h1>TechCart</h1>
+        <nav aria-label="Principal">
+            <ul>
+                <li>
+                    <a href="#catalogo">
+                        Catalogo
+                    </a>
+                </li>
+                <li>
+                    <a href="#compra">
+                        Compra
+                    </a>
+                </li>
+                <!-- I1 - Crear nosotros.html y enlazarla desde el <nav> de ambas paginas -->
+                <li>
+                    <a href="nosotros.html">
+                        Nosotros
+                    </a>
+                </li>
+                <!-- D2 - Sección de preguntas frecuentes con <summary> y <details> -->
+                <li>
+                    <a href="#faq">
+                        Preguntas frecuentes
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="catalogo">
+            <h2>Catalogo de productos</h2>
+            <!-- I2 - <table> de especificaciones en cada producto -->
+            <div class="productos">
+                <article class="destacado">
+                    <figure>
+                        <img src="https://www.appleperu.pe/wp-content/uploads/macbook-pro-retina.jpg"
+                            alt="MacBook Pro Retina"
+                            width="200"/>
+                        <figcaption>Apple</figcaption>
+                    </figure>
+
+                    <h3 class="titulo">MacBook Pro Retina 13"</h3>
+                    <p><strong>$1,999.99</strong></p>
+                    <button type="button">Agregar al carrito</button>
+
+                    <table class="especificaciones">
+                        <caption>Especificaciones</caption>
+                        <thead>
+                            <tr>
+                                <th>Especificación</th>
+                                <th>Detalle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Pantalla</td>
+                                <td>13 pulgadas Retina</td>
+                            </tr>
+                            <tr>
+                                <td>Procesador</td>
+                                <td>Intel Core i5</td>
+                            </tr>
+                            <tr>
+                                <td>Memoria RAM</td>
+                                <td>8 GB</td>
+                            </tr>
+                            <tr>
+                                <td>Almacenamiento</td>
+                                <td>256 GB SSD</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+
+                <article>
+                    <figure>
+                        <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcS1eCKck5yyiDW08v0Uuzc-LssM4iJC3ttkPCbGSW-JpuJpH_OtZoalXeRYyit1DX0tDM9PaF0aedQP_PSy8K1kUc2Un-b1pr0I8YTPaokJFTWsc5nwQYzluZwKWMaS0CKHa9SD7XUSLw&usqp=CAc"
+                            alt="MacBook Pro 14 pulgadas"
+                            width="200"/>
+                        <figcaption>Apple</figcaption>
+                    </figure>
+
+                    <h3 class="titulo">MacBook Pro 14"</h3>
+                    <p><strong>$2,000.99</strong></p>
+                    <button type="button">Agregar al carrito</button>
+
+                    <table class="especificaciones">
+                        <caption>Especificaciones</caption>
+                        <thead>
+                            <tr>
+                                <th>Especificación</th>
+                                <th>Detalle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Pantalla</td>
+                                <td>14.2 pulgadas Liquid Retina XDR</td>
+                            </tr>
+                            <tr>
+                                <td>Procesador</td>
+                                <td>Apple M1 Pro</td>
+                            </tr>
+                            <tr>
+                                <td>Memoria RAM</td>
+                                <td>16 GB</td>
+                            </tr>
+                            <tr>
+                                <td>Almacenamiento</td>
+                                <td>512 GB SSD</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+
+                <article>
+                    <figure>
+                        <img src="https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111902_mbp14-silver2.png"
+                            alt="MacBook Pro 14 pulgadas color plata"
+                            width="200"/>
+                        <figcaption>Apple</figcaption>
+                    </figure>
+
+                    <h3 class="titulo">MacBook Pro 14"</h3>
+                    <p><strong>$4,599.99</strong></p>
+                    <button type="button">Agregar al carrito</button>
+
+                    <table class="especificaciones">
+                        <caption>Especificaciones</caption>
+                        <thead>
+                            <tr>
+                                <th>Especificación</th>
+                                <th>Detalle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Pantalla</td>
+                                <td>14.2 pulgadas Liquid Retina XDR</td>
+                            </tr>
+                            <tr>
+                                <td>Procesador</td>
+                                <td>Apple M3 Pro</td>
+                            </tr>
+                            <tr>
+                                <td>Memoria RAM</td>
+                                <td>18 GB</td>
+                            </tr>
+                            <tr>
+                                <td>Almacenamiento</td>
+                                <td>512 GB SSD</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+
+                <article>
+                    <figure>
+                        <img src="https://www.appleperu.pe/wp-content/uploads/1990-1.jpg"
+                            alt="MacBook Pro"
+                            width="200"/>
+                        <figcaption>Apple</figcaption>
+                    </figure>
+
+                    <h3 class="titulo">MacBook Pro 15"</h3>
+                    <p><strong>$1,009.99</strong></p>
+                    <button type="button">Agregar al carrito</button>
+
+                    <table class="especificaciones">
+                        <caption>Especificaciones</caption>
+                        <thead>
+                            <tr>
+                                <th>Especificación</th>
+                                <th>Detalle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Pantalla</td>
+                                <td>15.4 pulgadas Retina</td>
+                            </tr>
+                            <tr>
+                                <td>Procesador</td>
+                                <td>Intel Core i7</td>
+                            </tr>
+                            <tr>
+                                <td>Memoria RAM</td>
+                                <td>16 GB</td>
+                            </tr>
+                            <tr>
+                                <td>Almacenamiento</td>
+                                <td>512 GB SSD</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+                <!-- F - Agregar quinto producto con su <figure> y alt -->
+                <article>
+                    <figure>
+                        <img src="https://mac-center.com.pe/cdn/shop/files/IMG-21467994_m_jpeg_1_43a5f595-c136-4697-b7fd-fc91656c4546.jpg?v=1788983326&width=823" alt="IPhone 18 Pro Max 256GB Negro Titanio" width="200"/>
+                        <figcaption>Apple</figcaption>
+                    </figure>
+                    <h3 class="titulo">IPhone 18 Pro Max 256GB Negro Titanio</h3>
+                    <p><strong>$1,199.99</strong></p>
+                    <button type="button">Agregar al carrito</button>
+                    <table class="especificaciones">
+                        <caption>Especificaciones</caption>
+                        <thead>
+                            <tr>
+                                <th>Especificación</th>
+                                <th>Detalle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Pantalla</td>
+                                <td>6.9 pulgadas Super Retina XDR</td>
+                            </tr>
+                            <tr>
+                                <td>Procesador</td>
+                                <td>Chip A19 Pro</td>
+                            </tr>
+                            <tr>
+                                <td>Memoria RAM</td>
+                                <td>12 GB</td>
+                            </tr>
+                            <tr>
+                                <td>Almacenamiento</td>
+                                <td>256 GB</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+            </div>
+        </section>
+            <aside>
+                <h2>Informacion de compra</h2>
+                <h3>Como comprar en 3 pasos</h3>
+                <ol>
+                    <li>Selecciona el producto</li>
+                    <li>Agrega al carrito</li>
+                    <li>Confirma el pedido con tus datos de envio</li>
+                </ol>
+                <!-- I2 - Segunda <ol> en el <aside>-->
+                <h3>Cuidados del producto</h3>
+                <ol>
+                    <li>Mantén el equipo limpio y libre de polvo.</li>
+                    <li>Evita exponerlo a líquidos.</li>
+                    <li>Utiliza accesorios compatibles.</li>
+                    <li>Protege el equipo de golpes y caídas.</li>
+                    <li>Guárdalo en un lugar seco y seguro.</li>
+                </ol>
+
+                <h3>Costos de envio</h3>
+                <table>
+                    <caption>Tarifas por zona</caption>
+                    <thead>
+                        <tr>
+                            <th>Zona</th>
+                            <th>Tiempo</th>
+                            <th>Costo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lima</td>
+                            <td>24 horas</td>
+                            <td>Gratis</td>
+                        </tr>
+                        <tr>
+                            <td>Nacional</td>
+                            <td>3-5 dias</td>
+                            <td>$10.00</td>
+                        </tr>
+                        <tr>
+                            <td>Internacional</td>
+                            <td>7-14 dias</td>
+                            <td>$25.00</td>
+                        </tr>
+                </table>
+            </aside>
+            <section id="compra">
+                <h2>Finalizar compra</h2>
+                <form>
+                    <fieldset>
+                        <legend>Datos de envio</legend>
+                        <p>
+                            <label for="nombre">Nombre completo</label><br/>
+                            <input type="" id="nombre" name="nombre" required minlength="3" autocomplete="name">
+                        </p>
+                        <p>
+                            <label for="email">Correo electronico</label><br/>
+                            <input type="" id="email" name="email" required autocomplete="email">
+                        </p>
+                        <p>
+                            <label for="direccion">Dirección</label><br/>
+                            <input type="" id="direccion" name="direccion" required autocomplete="direccion">
+                        </p>
+                        <p>
+                            <label for="ciudad">Ciudad</label><br/>
+                            <input type="" id="ciudad" name="ciudad" list="cuidades" required autocomplete="ciudad">
+
+                            <datalist id="ciudades">
+                                <option value="Lima"></option>
+                                <option value="Bogota"></option>
+                                <option value="Ciudad de Mexico"></option>
+                                <option value="Buenos Aires"></option>
+                                <option value="Madrid"></option>
+                            </datalist>
+                        </p>
+                        <!-- D1 - <optgroup> de países disponibles para envio -->
+                        <p>
+                            <label for="pais">País</label>
+                            <select name="pais" id="pais" required>
+                            <option value="pe">Elige un país</option>
+                                <optgroup label="Paises disponibles">
+                                    <option value="pe">Perú</option>
+                                    <option value="co">Colombia</option>
+                                    <option value="mx">Mexico</option>
+                                    <option value="ar">Argentina</option>
+                                    <option value="es">España</option>
+                                </optgroup>
+                            </select>
+                        </p>
+                        <p>
+                            <label for="telefono">Telefono</label><br/>
+                            <input type="tel" pattern="[0-9]{7,}" title="Solo números, al menos 7 digitos" autocomplete="tel">
+                        </p>
+                        <p>
+                            <label for="fecha">Fecha de entrega deseada</label><br/>
+                            <input type="date" id="fecha" name="fecha">
+                        </p>
+                        <p>
+                            <label for="cantidad">Cantidad de unidades</label><br/>
+                            <input type="number" id="cantidad" name="cantidad" min="1" max="10" step="1" value="1" required>
+                        </p>
+                        <p>
+                            <label for="notas">Notas para el repartidor</label><br/>
+                            <textarea type="notas" id="notas" name="cantidad" rows="5" maxlength="200"></textarea>
+                        </p>
+                    </fieldset>
+                    <!-- D1 - fieldset de facturación con Empresa y RUC -->
+                    <fieldset>
+                        <legend>Facturación</legend>
+                        <p>
+                            <label for="empresa">Empresa</label><br/>
+                            <input type="" id="empresa" name="empresa" minlength="3" autocomplete="empresa">
+                        </p>
+                        <p>
+                            <label for="ruc">RUC</label><br/>
+                            <input type="tel" pattern="[0-9]{11}" title="Solo números, al menos 11 digitos" autocomplete="ruc">
+                        </p>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Metodo de pago</legend>
+                        <p>
+                            <input type="radio" id="pago-tarjeta" name="pago" value="tarjeta" required>
+                            <label for="pago-tarjeta">Tarjeta</label>
+                        </p>
+                        <p>
+                            <input type="radio" id="pago-paypal" name="pago" value="paypal" required>
+                            <label for="pago-paypal">PayPal</label>
+                        </p>
+                        <p>
+                            <input type="radio" id="pago-contra" name="pago" value="contraentrega" required>
+                            <label for="pago-contra">Contra entrega</label>
+                        </p>
+                    </fieldset>
+                    <p>
+                        <input type="checkbox" id="terminos" name="terminos" required>
+                        <label for="terminos">Acepto los términos y condiciones</label>
+                    </p>
+                    <button type="submit">Confirmar pedido</button>
+                </form>
+            </section>
+            <!-- D2 - Sección de preguntas frecuentes con <summary> y <details> -->
+            <section id="faq">
+                <h2>Preguntas frecuentes</h2>
+                <ul>
+                    <li>                
+                        <details>
+                            <summary>¿Qué métodos de pago aceptan?</summary>
+                            <p>Aceptamos tarjetas de crédito, tarjetas de débito y transferencias bancarias.</p>
+                        </details>
+                    </li>
+                    <li>                
+                        <details>
+                            <summary>¿Realizan envíos a todo el Perú?</summary>
+                            <p>Sí, realizamos envíos a diferentes ciudades del Perú. El tiempo de entrega depende de la ubicación.</p>
+                        </details>
+                    </li>
+                    <li>                
+                        <details>
+                            <summary>¿Cuánto tiempo demora la entrega?</summary>
+                            <p>Los pedidos en Lima pueden entregarse en aproximadamente 24 horas. Los envíos nacionales pueden demorar entre 3 y 5 días.</p>
+                        </details>
+                    </li>
+                    <li>                
+                        <details>
+                            <summary>¿Los productos tienen garantía?</summary>
+                            <p>Sí, nuestros productos cuentan con garantía según las condiciones establecidas por el fabricante.</p>
+                        </details>
+                    </li>
+                    <li>                
+                        <details>
+                            <summary>¿Puedo devolver un producto?</summary>
+                            <p>Sí, puedes solicitar la devolución siempre que se cumplan las condiciones establecidas en nuestra política de devoluciones.</p> </details>
+                        </details>
+                    </li>
+                </ol>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2026 TechCart - Proyecto educativo</p>
+        <p> Datos e imagenes de <a href="https://dummyjson.com" target="_blank" rel="noopener noreferrer">DummyJson</a></p>
+        <address>Contacto: <a href="mailto:info@techcart.com">info@techcart.com</a></address>
+        </footer>
+</body>
+</html>
