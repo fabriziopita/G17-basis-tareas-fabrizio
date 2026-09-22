@@ -110,6 +110,13 @@ body {
     max-width: 960px;
     margin: 0 auto;
     padding: 1rem;
+    display: grid;
+    grid-template-columns: 300px minmax(0,1fr);
+    grid-template-areas: 
+        "cabecera cabecera"
+        "lateral contenido"
+        "pie pie";
+    gap: 24px;
 }
 
 h1 {
@@ -228,6 +235,16 @@ button {
 .destacado {
     background-color: #e8fbf6;
     border: 3px solid #12c79a;
+    grid-column: span 2;
+    grid-row: span 2;
+    justify-content: center;
+}
+.destacado img {
+    width: 100%;
+    max-width: 300px;
+}
+.destacado button {
+    margin-top: 16px;
 }
 .especificaciones {
     width: 100%;
@@ -240,6 +257,7 @@ button {
     background-color: #fff;
     border-radius: 12px;
     padding: 1.5rem;
+    margin-top: 24px;
 }
 
 #compra p {
@@ -247,20 +265,24 @@ button {
     flex-direction: row;
     gap: 8px;
     align-items: center;
+    flex-wrap: wrap;
 }
-
 #compra br {
     display: none;
 }
-
-fieldset {
+#compra fieldset label {
+    flex: 0 0 180px;
+}
+fieldset{
     border: 1px solid #d2d2d7;
     border-radius: 10px;
     padding: 1rem;
     margin-bottom: 1rem;
 }
-
-fieldset p:last-child {
+fieldset p{
+    margin: 0.75rem 0;
+}
+fieldset p:last-child{
     margin-bottom: 0;
 }
 
@@ -378,6 +400,13 @@ textarea:focus-visible {
 a[target="_blank"]::after {
     content: " ->";
 }
+/* Herencia */
+input, select, textarea, button{
+    font: inherit
+}
+figure{
+    margin: 0 0 0 0;
+}
 footer{
     margin-top: 1.5rem;
     display: flex;
@@ -397,6 +426,7 @@ footer address {
     display: grid;
     grid-template-columns: repeat(auto-fill, 
         minmax(300px,1fr));
+    grid-auto-rows: 1fr;
     gap: 16px;
 }
 
@@ -445,3 +475,8 @@ footer address {
     color: rgba(0, 0, 0, 0.75);
     font-weight: 500;
 }
+
+header{grid-area: cabecera;}
+main{grid-area: contenido;}
+aside{grid-area: lateral;}
+footer{grid-area: pie;}
