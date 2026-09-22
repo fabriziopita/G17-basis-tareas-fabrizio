@@ -35,7 +35,7 @@ aside {
     border: 1px solid #d2d2d7;
     border-radius: 12px;
     padding: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin: 1.5rem auto;
 }
 
 aside h2,
@@ -378,21 +378,26 @@ textarea:focus-visible {
 a[target="_blank"]::after {
     content: " ->";
 }
-
+footer{
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-around;
+}
 footer p,
 footer address {
-    margin: 0.25rem 0;
+    margin: 0;
 }
 
 footer address {
+    order: -1;
     font-style: normal;
 }
 
 .productos {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 
+        minmax(300px,1fr));
     gap: 16px;
-    justify-content: space-around;
 }
 
 #faq {
