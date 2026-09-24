@@ -86,8 +86,11 @@ aside ol {
 aside table {
     width: 100%;
     border-collapse: collapse;
+    font-size: 0.85rem;
 }
-
+aside th, aside td{
+    padding: 6px 8px;
+}
 aside table caption {
     font-weight: 600;
     text-align: left;
@@ -143,6 +146,8 @@ body {
         "lateral contenido"
         "pie pie";
     gap: 24px;
+    min-height: 100vh;
+    grid-template-rows: auto 1fr auto;
 }
 
 h1 {
@@ -299,6 +304,12 @@ button {
 }
 #compra fieldset label {
     flex: 0 0 180px;
+}
+.fila {
+    display: flex;
+}
+.fila p {
+    flex: 1;
 }
 fieldset{
     border: 1px solid #d2d2d7;
@@ -505,5 +516,45 @@ footer address {
 
 header{grid-area: cabecera;}
 main{grid-area: contenido;}
-aside{grid-area: lateral;}
+aside{grid-area: lateral; align-self: start;}
 footer{grid-area: pie;}
+.envio {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 16px;
+}
+#compra .envio label,
+#compra .envio input,
+#compra .envio select,
+#compra .envio textarea {
+    flex-basis: 100%;
+}
+.campo-ancho {
+    grid-column: 1/-1;
+}
+
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+    body{
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+        "cabecera"
+        "lateral"
+        "contenido"
+        "pie";
+        grid-auto-rows: auto auto 1fr auto
+    }
+    .destacado {
+        grid-column: auto;
+        grid-row: auto;
+    }
+    .envio {
+        grid-template-columns: 1fr;
+    }
+    .productos {
+        grid-auto-rows: auto;
+    }
+}
