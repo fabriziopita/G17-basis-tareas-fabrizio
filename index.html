@@ -35,11 +35,15 @@
                 </li>
             </ul>
         </nav>
+        <button class="carrito" type="button">
+            Comprar
+            <span class="contador">0</span>
+        </button>
     </header>
     <main>
         <section id="categorias">
             <h2>Categorías</h2>
-            <h4>Solo tenemos dispositivos Apple disponibles</h4>
+            <h4>Actualmente solo tenemos dispositivos Apple disponibles</h4>
             <nav aria-label="Categorias">
                 <ul>
                     <li>
@@ -288,41 +292,7 @@
                         <p>
                             <label for="direccion">Dirección</label><br/>
                             <input type="" id="direccion" name="direccion" required autocomplete="direccion">
-                        </p>                                     
-                        <p>
-                            <label for="ciudad">Ciudad</label><br/>
-                            <input type="" id="ciudad" name="ciudad" list="cuidades" required autocomplete="ciudad">
-
-                            <datalist id="ciudades">
-                                <option value="Lima"></option>
-                                <option value="Bogota"></option>
-                                <option value="Ciudad de Mexico"></option>
-                                <option value="Buenos Aires"></option>
-                                <option value="Madrid"></option>
-                            </datalist>
-                        </p>
-                        <!-- D1 - <optgroup> de países disponibles para envio -->
-                        <p>
-                            <label for="pais">País</label>
-                            <select name="pais" id="pais" required>
-                            <option value="pe">Elige un país</option>
-                                <optgroup label="Paises disponibles">
-                                    <option value="pe">Perú</option>
-                                    <option value="co">Colombia</option>
-                                    <option value="mx">Mexico</option>
-                                    <option value="ar">Argentina</option>
-                                    <option value="es">España</option>
-                                </optgroup>
-                            </select>
-                        </p>
-                        <p>
-                            <label for="telefono">Telefono</label><br/>
-                            <input type="tel" pattern="[0-9]{7,}" title="Solo números, al menos 7 digitos" autocomplete="tel">
-                        </p>
-                        <p>
-                            <label for="fecha">Fecha de entrega deseada</label><br/>
-                            <input type="date" id="fecha" name="fecha">
-                        </p>
+                        </p>                                   
                         <p>
                             <label for="cantidad">Cantidad de unidades</label><br/>
                             <input type="number" id="cantidad" name="cantidad" min="1" max="10" step="1" value="1" required>
@@ -331,6 +301,48 @@
                             <label for="notas">Notas para el repartidor</label><br/>
                             <textarea type="notas" id="notas" name="cantidad" rows="5" maxlength="200"></textarea>
                         </p>
+
+                        <div class="fila">
+                            <p>
+                                <label for="ciudad">Ciudad</label><br/>
+                                <input type="" id="ciudad" name="ciudad" list="ciudades" required autocomplete="ciudad">
+
+                                <datalist id="ciudades">
+                                    <option value="Lima"></option>
+                                    <option value="Bogota"></option>
+                                    <option value="Ciudad de Mexico"></option>
+                                    <option value="Buenos Aires"></option>
+                                    <option value="Madrid"></option>
+                                </datalist>
+                            </p>
+                            <p>
+                                <label for="pais">País</label><br/>
+                                <select name="pais" id="pais" required>
+                                    <option value="">Elige un país</option>
+                                    <optgroup label="Paises disponibles">
+                                        <option value="pe">Perú</option>
+                                        <option value="co">Colombia</option>
+                                        <option value="mx">Mexico</option>
+                                        <option value="ar">Argentina</option>
+                                        <option value="es">España</option>
+                                    </optgroup>
+                                </select>
+                            </p>
+                        </div>
+
+                        <div class="fila">
+                            <p>
+                                <label for="telefono">Telefono</label><br/>
+                                <input type="tel" id="telefono" name="telefono"
+                                    pattern="[0-9]{7,}"
+                                    title="Solo números, al menos 7 digitos"
+                                    autocomplete="tel">
+                            </p>
+                            <p>
+                                <label for="fecha">Fecha de entrega deseada</label><br/>
+                                <input type="date" id="fecha" name="fecha">
+                            </p>
+                        </div>
                     </fieldset>
                     <!-- D1 - fieldset de facturación con Empresa y RUC -->
                     <fieldset>
@@ -450,9 +462,28 @@
             </table>
         </aside>
         <footer>
-            <p>&copy; 2026 TechCart - Proyecto educativo</p>
+            <section>
+                <h3>Marca: </h3>
+                <p>Tienda de productos electrónicos.</p>
+            </section>
+
+            <nav aria-label="Enlaces">
+                <h3>Enlaces: </h3>
+                <ul>
+                    <li><a href="#catalogo">Catálogo</a></li>
+                    <li><a href="#compra">Compra</a></li>
+                    <li><a href="nosotros.html">Nosotros</a></li>
+                    <li><a href="#faq">Preguntas frecuentes</a></li>
+                </ul>
+            </nav>
+
+            <address>
+                <h3>Contacto: </h3>
+                <a href="mailto:info@techcart.com">info@techcart.com</a>
+            </address>
+            <!--p>&copy; 2026 TechCart - Proyecto educativo</p>
             <p> Datos e imagenes de <a href="https://dummyjson.com" target="_blank" rel="noopener noreferrer">DummyJson</a></p>
-            <address>Contacto: <a href="mailto:info@techcart.com">info@techcart.com</a></address>
+            <address>Contacto: <a href="mailto:info@techcart.com">info@techcart.com</a></address -->
         </footer>
 </body>
 </html>
