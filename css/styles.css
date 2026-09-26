@@ -219,6 +219,7 @@ body {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas: 
         "cabecera"
+        "promo"
         "lateral"
         "contenido"
         "pie";
@@ -659,7 +660,7 @@ footer{grid-area: pie;}
 #compra .fila {
     display: flex;
     gap: 16px;
-        grid-column: 1 / -1;
+    grid-column: 1 / -1;
 }
 #compra .fila p {
     flex: 1;
@@ -684,6 +685,16 @@ footer{grid-area: pie;}
     margin: 0 0 0.25rem;
     font-size: 1rem;
 }
+
+.promo {
+    grid-area: promo;
+    background-color: var(--fondo);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+}
+
 @media(min-width: 48em) {
     header {
         flex-direction: row;
@@ -706,6 +717,7 @@ footer{grid-area: pie;}
         grid-template-columns: 300px minmax(0,1fr);
         grid-template-areas: 
         "cabecera cabecera"
+        "lateral promo"
         "lateral contenido"
         "pie pie";
         grid-template-rows: auto 1fr auto;
