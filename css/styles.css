@@ -10,6 +10,7 @@
     --fondo-suave: #e5e5ea;
     --tarjeta: #fff;
     --resalte: #1d1d1f;
+    --texto: #1d1d1f;
     --texto-suave: #6e6e73;
     --borde: #d2d2d7;
 
@@ -207,23 +208,22 @@ th {
 }
 
 body {
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-family: var(--fuente);
     line-height: 1.5;
-    color: var(--resalte);
+    color: var(--texto);
     background-color: var(--fondo);
     box-sizing: border-box;
     max-width: 1100px;
-    margin-inline: auto; 
+    margin-inline: auto;
     padding: 1rem;
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: 
+    grid-template-areas:
         "cabecera"
         "promo"
-        "lateral"
         "contenido"
+        "lateral"
         "pie";
-    grid-auto-rows: auto auto 1fr auto;
     gap: 24px;
     min-height: 100vh;
 }
@@ -235,7 +235,7 @@ h1 {
 
 h2 {
     color: var(--subtitulo);
-    font-size: clamp(1.25, 1rem + 1,2vw, 1.5rem);
+    font-size: clamp(1.25rem, 1rem + 1.2vw, 1.5rem);
 }
 
 h2::after {
@@ -328,7 +328,7 @@ article h3 {
 /* ------------------------------------------------------------ */
 
 article p {
-    margin: 0 0 0 0.75rem;
+    margin: 0;
 }
 
 a {
@@ -346,7 +346,7 @@ button {
     border: 0;
     border-radius: 999px;
     padding: 0.6em 1.2em;
-    transition: transform 1s ease, filter 2s ease;
+    transition: transform 0.55s ease, filter 0.2s ease;
 }
 
 /* CLASE */
@@ -364,9 +364,13 @@ button {
 }
 .especificaciones {
     width: 100%;
-    height: 1%;
+    table-layout: fixed;
     border-collapse: collapse;
     margin: 1.5em auto;
+}
+.especificaciones th,
+.especificaciones td {
+    overflow-wrap: break-word;
 }
 /* ID */
 #compra {
@@ -556,10 +560,10 @@ figure{
     margin: 0 0 0 0;
 }
 footer {
-    display: flex;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: start;
     gap: 24px;
-    flex-wrap: wrap;
 }
 
 footer section,
@@ -582,6 +586,7 @@ footer nav > ul {
 .productos {
     display: grid;
     gap: 16px;
+    grid-auto-flow: dense;
 }
 
 .productos article {
@@ -695,42 +700,88 @@ footer{grid-area: pie;}
     margin-top: 1.5rem;
 }
 
-@media(min-width: 48em) {
+@media (min-width: 48em) {
     header {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
     }
+
     .productos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         grid-auto-rows: 1fr;
+        grid-auto-flow: dense;
     }
+
     .destacado {
         grid-column: span 2;
         grid-row: span 2;
     }
+
+    .productos article:nth-child(2) {
+        grid-column: span 2;
+    }
+
     .envio {
         grid-template-columns: 1fr 1fr;
     }
+
+    footer {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    #compra form {
+        display: grid;
+        grid-template:
+            "envio        pago"
+            "envio        terminos"
+            "facturacion  facturacion"
+            "boton        boton"
+            / 2fr 1fr;
+        gap: 16px;
+    }
+    #compra form > .envio {
+        grid-area: envio;
+    }
+    #compra form > fieldset:nth-of-type(2) {
+        grid-area: facturacion;
+    }
+    #compra form > fieldset:nth-of-type(3) {
+        grid-area: pago;
+        align-self: start;
+    }
+    #compra form > p {
+        grid-area: terminos;
+        align-self: start;
+    }
+    #compra form > button {
+        grid-area: boton;
+        justify-self: start;
+    }
 }
-@media(min-width: 64em) {
+@media (min-width: 64em) {
     body {
-        grid-template-columns: minmax(0,1fr) 300px;
-        grid-template-areas: 
-        "cabecera cabecera"
-        "promo lateral"
-        "contenido lateral"
-        "pie pie";
-        grid-template-rows: auto 1fr auto;
+        grid-template-columns: minmax(0, 1fr) 300px;
+        grid-template-areas:
+            "cabecera cabecera"
+            "promo promo"
+            "contenido lateral"
+            "pie pie";
+        grid-template-rows: auto auto 1fr auto;
     }
 }
 @media (min-width: 75em) {
     body {
         max-width: 1280px;
     }
+
+    .productos {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
 }
-@media (profers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) {
     .productos article,
-    .destacado::before() {
+    .destacado::before {
         animation: none;
     }
     article, button {

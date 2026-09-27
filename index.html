@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -40,6 +40,10 @@
             <span class="contador">0</span>
         </button>
     </header>
+    <section class="promo">
+        <h2>Promoción del mes</h2>
+        <p>Envío gratis en compras mayores a $500.</p>
+    </section>
     <main>
         <section id="categorias">
             <h2>Categorías</h2>
@@ -68,10 +72,6 @@
                     </li>
                 </ul>
             </nav>
-        </section>
-        <section class="promo">
-            <h2>Promoción del mes</h2>
-            <p>Envío gratis en compras mayores a $500.</p>
         </section>
         <section class="beneficios" aria-label="Beneficios de la tienda">
             <article>
@@ -304,15 +304,15 @@
                         <legend>Datos de envio</legend>
                         <p>
                             <label for="nombre">Nombre completo</label><br/>
-                            <input type="" id="nombre" name="nombre" required minlength="3" autocomplete="name">
+                            <input type="text" id="nombre" name="nombre" required minlength="3" autocomplete="name">
                         </p>
                         <p>
                             <label for="email">Correo electronico</label><br/>
-                            <input type="" id="email" name="email" required autocomplete="email">
+                            <input type="email" id="email" name="email" required autocomplete="email">
                         </p>
                         <p>
                             <label for="direccion">Dirección</label><br/>
-                            <input type="" id="direccion" name="direccion" required autocomplete="direccion">
+                            <input type="text" id="direccion" name="direccion" required autocomplete="direccion">
                         </p>                                   
                         <p>
                             <label for="cantidad">Cantidad de unidades</label><br/>
@@ -320,13 +320,13 @@
                         </p>
                         <p class="campo-ancho">
                             <label for="notas">Notas para el repartidor</label><br/>
-                            <textarea type="notas" id="notas" name="cantidad" rows="5" maxlength="200"></textarea>
+                            <textarea type="notas" id="notas" name="notas" rows="5" maxlength="200"></textarea>
                         </p>
 
                         <div class="fila">
                             <p>
                                 <label for="ciudad">Ciudad</label><br/>
-                                <input type="" id="ciudad" name="ciudad" list="ciudades" required autocomplete="ciudad">
+                                <input type="text" id="ciudad" name="ciudad" list="ciudades" required autocomplete="ciudad">
 
                                 <datalist id="ciudades">
                                     <option value="Lima"></option>
@@ -370,11 +370,11 @@
                         <legend>Facturación</legend>
                         <p>
                             <label for="empresa">Empresa</label><br/>
-                            <input type="" id="empresa" name="empresa" minlength="3" autocomplete="empresa">
+                            <input type="text" id="empresa" name="empresa" minlength="3" autocomplete="empresa">
                         </p>
                         <p>
                             <label for="ruc">RUC</label><br/>
-                            <input type="tel" pattern="[0-9]{11}" title="Solo números, al menos 11 digitos" autocomplete="ruc">
+                            <input type="text" id="ruc" name="ruc" pattern="[0-9]{11}" title="Solo números, al menos 11 digitos" autocomplete="ruc">
                         </p>
                     </fieldset>
                     <fieldset>
@@ -430,10 +430,10 @@
                     <li>                
                         <details>
                             <summary>¿Puedo devolver un producto?</summary>
-                            <p>Sí, puedes solicitar la devolución siempre que se cumplan las condiciones establecidas en nuestra política de devoluciones.</p> </details>
+                            <p>Sí, puedes solicitar la devolución siempre que se cumplan las condiciones establecidas en nuestra política de devoluciones.</p>
                         </details>
                     </li>
-                </ol>
+                </ul>
             </section>
         </main>
         <aside>
@@ -480,28 +480,33 @@
                         <td>7-14 dias</td>
                         <td>$25.00</td>
                     </tr>
+                </tbody>
             </table>
         </aside>
         <footer>
-            <section>
-                <h3>Marca: </h3>
+            <div>
+                <h3>Marca:</h3>
                 <p>Tienda de productos electrónicos.</p>
-            </section>
+            </div>
 
-            <nav aria-label="Enlaces">
-                <h3>Enlaces: </h3>
-                <ul>
-                    <li><a href="#catalogo">Catálogo</a></li>
-                    <li><a href="#compra">Compra</a></li>
-                    <li><a href="nosotros.html">Nosotros</a></li>
-                    <li><a href="#faq">Preguntas frecuentes</a></li>
-                </ul>
-            </nav>
+            <div>
+                <h3>Enlaces:</h3>
+                <nav aria-label="Enlaces">
+                    <ul>
+                        <li><a href="#catalogo">Catálogo</a></li>
+                        <li><a href="#compra">Compra</a></li>
+                        <li><a href="nosotros.html">Nosotros</a></li>
+                        <li><a href="#faq">Preguntas frecuentes</a></li>
+                    </ul>
+                </nav>
+            </div>
 
-            <address>
-                <h3>Contacto: </h3>
-                <a href="mailto:info@techcart.com">info@techcart.com</a>
-            </address>
+            <div>
+                <h3>Contacto:</h3>
+                <address>
+                    <a href="mailto:info@techcart.com">info@techcart.com</a>
+                </address>
+            </div>
             <!--p>&copy; 2026 TechCart - Proyecto educativo</p>
             <p> Datos e imagenes de <a href="https://dummyjson.com" target="_blank" rel="noopener noreferrer">DummyJson</a></p>
             <address>Contacto: <a href="mailto:info@techcart.com">info@techcart.com</a></address -->
