@@ -1,510 +1,593 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TechCart - Tienda electrónica</title>
-    <link rel="stylesheet" href="css/styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechCart - Tienda electrónica</title>
+
+  <link rel="stylesheet" href="./css/styles.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script type="module" src="./js/excluir/tareasclase7.js"></script>
+  <style type="text/tailwindcss">
+
+    @theme {
+      --color-marca:        #12c79a;
+      --color-sobre-marca:  #fff;
+      --color-exito:        hsl(146 85% 26%);
+      --color-error:        #c0392b;
+      --color-fondo:        #f5f5f7;
+      --color-fondo-suave:  #e5e5ea;
+      --color-tarjeta:      #fff;
+      --color-resalte:      #c9eee4;
+      --color-acento:       #8ff5df;
+      --color-texto:        #1d1d1f;
+      --color-texto-suave:  #6e6e73;
+      --color-borde:        #d2d2d7;
+
+      --radius-tarjeta: 12px;
+
+      --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+      --text-seccion: clamp(1.25rem, 1rem + 1.2vw, 1.5rem);
+
+      --animate-aparecer: aparecer 0.5s ease-out backwards;
+      --animate-latido:   latido 1.6s ease-in-out infinite alternate;
+
+      --breakpoint-monitor: 75rem;
+
+      --container-pagina: 1100px;
+      --container-ancha:  1280px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-marca:        #00e6b8;
+        --color-sobre-marca:  #071512;
+        --color-exito:        #39ff88;
+        --color-error:        #ff5c7a;
+        --color-fondo:        #0d0f14;
+        --color-fondo-suave:  #171a22;
+        --color-tarjeta:      #202430;
+        --color-resalte:      #153a34;
+        --color-acento:       #8ff5df;
+        --color-texto:        #eef1f5;
+        --color-texto-suave:  #a8adbb;
+        --color-borde:        #353a49;
+      }
+    }
+
+    @layer components {
+
+      .tarjeta {
+        @apply bg-tarjeta border border-borde rounded-tarjeta p-4;
+      }
+
+      .boton {
+        @apply bg-marca text-sobre-marca cursor-pointer rounded-full px-[1.2em] py-[0.6em]
+               transition-[transform,filter] duration-150
+               hover:brightness-110 hover:-translate-y-px
+               focus-visible:brightness-110 focus-visible:-translate-y-px
+               active:translate-y-0 active:scale-95
+               focus-visible:outline-3 focus-visible:outline-marca focus-visible:outline-offset-2
+               motion-reduce:transition-none;
+      }
+
+      .campo {
+        @apply basis-full min-w-0 px-3 py-2 border border-borde rounded-lg
+               bg-fondo text-texto
+               placeholder:text-texto-suave placeholder:italic
+               user-invalid:border-error
+               focus-visible:outline-3 focus-visible:outline-marca focus-visible:outline-offset-2;
+      }
+
+      .titulo-seccion {
+        @apply text-seccion leading-tight text-texto
+               after:content-[''] after:block after:w-12 after:h-[3px]
+               after:bg-marca after:mt-1;
+      }
+
+      /* Celda de tabla (se repite en todas las tablas) */
+      .celda {
+        @apply border border-borde px-2 py-1.5 text-left;
+      }
+    }
+  </style>
 </head>
-<body>
-    <header>
-        <h1>TechCart</h1>
-        <nav aria-label="Principal">
-            <ul>
-                <li>
-                    <a href="#catalogo">
-                        Catalogo
-                    </a>
-                </li>
-                <li>
-                    <a href="#compra">
-                        Compra
-                    </a>
-                </li>
-                <!-- I1 - Crear nosotros.html y enlazarla desde el <nav> de ambas paginas -->
-                <li>
-                    <a href="nosotros.html">
-                        Nosotros
-                    </a>
-                </li>
-                <!-- D2 - Sección de preguntas frecuentes con <summary> y <details> -->
-                <li>
-                    <a href="#faq">
-                        Preguntas frecuentes
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <button class="carrito" type="button">
-            Comprar
-            <span class="contador">0</span>
-        </button>
-    </header>
-    <main>
-        <section id="categorias">
-            <h2>Categorías</h2>
-            <h4>Actualmente solo tenemos dispositivos Apple disponibles</h4>
-            <nav aria-label="Categorias">
-                <ul>
-                    <li>
-                        <a href="#catalogo">
-                            Apple
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#catalogo">
-                            Samsung
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#catalogo">
-                            Xiaomi
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#catalogo">
-                            Lenovo
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </section>
-        <section class="promo">
-            <h2>Promoción del mes</h2>
-            <p>Envío gratis en compras mayores a $500.</p>
-        </section>
-        <section class="beneficios" aria-label="Beneficios de la tienda">
-            <article>
-                <p class="icono" aria-hidden="true">🚚</p>
-                <h3>Envio gratis</h3>
-                <p>En compras desde S/100.00, a todo el país.</p>
-            </article>
-            <article>
-                <p class="icono" aria-hidden="true">🛡️</p>
-                <h3>Garantia real</h3>
-                <p>12 meses en todos los productos.</p>
-            </article>
-            <article>
-                <p class="icono" aria-hidden="true">🔒</p>
-                <h3>Pago seguro</h3>
-                <p>Tarjeta, Paypal o contra entrega.</p>
-            </article>
-        </section>
-        <section id="catalogo">
-            <h2>Catalogo de productos</h2>
-            <!-- I2 - <table> de especificaciones en cada producto -->
-            <div class="productos">
-                <article class="destacado">
-                    <figure>
-                        <img src="https://www.appleperu.pe/wp-content/uploads/macbook-pro-retina.jpg"
-                            alt="MacBook Pro Retina"
-                            width="200"/>
-                        <figcaption>Apple</figcaption>
-                    </figure>
 
-                    <h3 class="titulo">MacBook Pro Retina 13"</h3>
-                    <p><strong>$1,999.99</strong></p>
-                    <button type="button">Agregar al carrito</button>
+<body class="bg-fondo text-texto max-w-pagina monitor:max-w-ancha mx-auto p-4 lg:p-5 monitor:p-7">
 
-                    <table class="especificaciones">
-                        <caption>Especificaciones</caption>
-                        <thead>
-                            <tr>
-                                <th>Especificación</th>
-                                <th>Detalle</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Pantalla</td>
-                                <td>13 pulgadas Retina</td>
-                            </tr>
-                            <tr>
-                                <td>Procesador</td>
-                                <td>Intel Core i5</td>
-                            </tr>
-                            <tr>
-                                <td>Memoria RAM</td>
-                                <td>8 GB</td>
-                            </tr>
-                            <tr>
-                                <td>Almacenamiento</td>
-                                <td>256 GB SSD</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </article>
+  <header class="flex flex-col items-center gap-4 bg-tarjeta rounded-tarjeta p-4
+                 md:flex-row md:justify-between">
 
-                <article>
-                    <figure>
-                        <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcS1eCKck5yyiDW08v0Uuzc-LssM4iJC3ttkPCbGSW-JpuJpH_OtZoalXeRYyit1DX0tDM9PaF0aedQP_PSy8K1kUc2Un-b1pr0I8YTPaokJFTWsc5nwQYzluZwKWMaS0CKHa9SD7XUSLw&usqp=CAc"
-                            alt="MacBook Pro 14 pulgadas"
-                            width="200"/>
-                        <figcaption>Apple</figcaption>
-                    </figure>
+    <h1 class="flex items-center justify-center w-35 h-11 bg-marca text-sobre-marca rounded-lg text-xl">TechCart</h1>
 
-                    <h3 class="titulo">MacBook Pro 14"</h3>
-                    <p><strong>$2,000.99</strong></p>
-                    <button type="button">Agregar al carrito</button>
+    <nav aria-label="Principal">
+      <ul class="flex flex-wrap justify-center gap-x-5 gap-y-1">
+        <li><a class="text-marca font-semibold no-underline hover:underline" href="#catalogo">Catálogo</a></li>
+        <li><a class="text-marca font-semibold no-underline hover:underline" href="#compra">Compra</a></li>
+        <!-- I1 - Crear nosotros.html y enlazarla desde el <nav> de ambas páginas -->
+        <li><a class="text-marca font-semibold no-underline hover:underline" href="nosotros.html">Nosotros</a></li>
+        <!-- D2 - Sección de preguntas frecuentes con <summary> y <details> -->
+        <li><a class="text-marca font-semibold no-underline hover:underline" href="#faq">Preguntas frecuentes</a></li>
+      </ul>
+    </nav>
 
-                    <table class="especificaciones">
-                        <caption>Especificaciones</caption>
-                        <thead>
-                            <tr>
-                                <th>Especificación</th>
-                                <th>Detalle</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Pantalla</td>
-                                <td>14.2 pulgadas Liquid Retina XDR</td>
-                            </tr>
-                            <tr>
-                                <td>Procesador</td>
-                                <td>Apple M1 Pro</td>
-                            </tr>
-                            <tr>
-                                <td>Memoria RAM</td>
-                                <td>16 GB</td>
-                            </tr>
-                            <tr>
-                                <td>Almacenamiento</td>
-                                <td>512 GB SSD</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </article>
+    <button class="boton inline-flex items-center justify-center gap-2" type="button">
+      Comprar
+      <span class="contador inline-flex items-center justify-center size-[22px] rounded-full bg-acento text-[#071512] text-sm">0</span>
+    </button>
+  </header>
 
-                <article>
-                    <figure>
-                        <img src="https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111902_mbp14-silver2.png"
-                            alt="MacBook Pro 14 pulgadas color plata"
-                            width="200"/>
-                        <figcaption>Apple</figcaption>
-                    </figure>
+  <section class="promo tarjeta p-6">
+    <h2 class="titulo-seccion">Promoción del mes</h2>
+    <p>Envío gratis en compras mayores a $500.</p>
+  </section>
 
-                    <h3 class="titulo">MacBook Pro 14"</h3>
-                    <p><strong>$4,599.99</strong></p>
-                    <button type="button">Agregar al carrito</button>
+  <main>
 
-                    <table class="especificaciones">
-                        <caption>Especificaciones</caption>
-                        <thead>
-                            <tr>
-                                <th>Especificación</th>
-                                <th>Detalle</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Pantalla</td>
-                                <td>14.2 pulgadas Liquid Retina XDR</td>
-                            </tr>
-                            <tr>
-                                <td>Procesador</td>
-                                <td>Apple M3 Pro</td>
-                            </tr>
-                            <tr>
-                                <td>Memoria RAM</td>
-                                <td>18 GB</td>
-                            </tr>
-                            <tr>
-                                <td>Almacenamiento</td>
-                                <td>512 GB SSD</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </article>
+    <section id="categorias" class="flex flex-col items-center bg-tarjeta rounded-tarjeta p-4 mb-6">
+      <h2 class="titulo-seccion">Categorías</h2>
+      <h4 class="text-sm text-texto-suave my-2 before:content-['>_'] before:text-[1.1rem] before:mr-1">
+        Actualmente solo tenemos dispositivos Apple disponibles
+      </h4>
+      <nav aria-label="Categorias">
+        <ul class="flex flex-wrap justify-center gap-9">
+          <li><a class="text-marca font-semibold no-underline hover:underline" href="#catalogo">Apple</a></li>
+          <li><a class="text-marca font-semibold no-underline hover:underline" href="#catalogo">Samsung</a></li>
+          <li><a class="text-marca font-semibold no-underline hover:underline" href="#catalogo">Xiaomi</a></li>
+          <li><a class="text-marca font-semibold no-underline hover:underline" href="#catalogo">Lenovo</a></li>
+        </ul>
+      </nav>
+    </section>
 
-                <article>
-                    <figure>
-                        <img src="https://www.appleperu.pe/wp-content/uploads/1990-1.jpg"
-                            alt="MacBook Pro"
-                            width="200"/>
-                        <figcaption>Apple</figcaption>
-                    </figure>
+    <section class="grid grid-cols-[repeat(auto-fit,minmax(min(150px,100%),1fr))] gap-4 mb-6"
+             aria-label="Beneficios de la tienda">
+      <article class="tarjeta text-center">
+        <p class="text-3xl mb-1" aria-hidden="true">🚚</p>
+        <h3 class="text-base leading-tight mb-1">Envío gratis</h3>
+        <p class="text-sm text-texto-suave">En compras desde S/100.00, a todo el país.</p>
+      </article>
+      <article class="tarjeta text-center">
+        <p class="text-3xl mb-1" aria-hidden="true">🛡️</p>
+        <h3 class="text-base leading-tight mb-1">Garantía real</h3>
+        <p class="text-sm text-texto-suave">12 meses en todos los productos.</p>
+      </article>
+      <article class="tarjeta text-center">
+        <p class="text-3xl mb-1" aria-hidden="true">🔒</p>
+        <h3 class="text-base leading-tight mb-1">Pago seguro</h3>
+        <p class="text-sm text-texto-suave">Tarjeta, PayPal o contra entrega.</p>
+      </article>
+    </section>
 
-                    <h3 class="titulo">MacBook Pro 15"</h3>
-                    <p><strong>$1,009.99</strong></p>
-                    <button type="button">Agregar al carrito</button>
+    <section id="catalogo" class="mb-6">
+      <h2 class="titulo-seccion mb-4">Catálogo de productos</h2>
 
-                    <table class="especificaciones">
-                        <caption>Especificaciones</caption>
-                        <thead>
-                            <tr>
-                                <th>Especificación</th>
-                                <th>Detalle</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Pantalla</td>
-                                <td>15.4 pulgadas Retina</td>
-                            </tr>
-                            <tr>
-                                <td>Procesador</td>
-                                <td>Intel Core i7</td>
-                            </tr>
-                            <tr>
-                                <td>Memoria RAM</td>
-                                <td>16 GB</td>
-                            </tr>
-                            <tr>
-                                <td>Almacenamiento</td>
-                                <td>512 GB SSD</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </article>
-                <!-- F - Agregar quinto producto con su <figure> y alt -->
-                <article>
-                    <figure>
-                        <img src="https://mac-center.com.pe/cdn/shop/files/IMG-21467994_m_jpeg_1_43a5f595-c136-4697-b7fd-fc91656c4546.jpg?v=1788983326&width=823" alt="IPhone 18 Pro Max 256GB Negro Titanio" width="200"/>
-                        <figcaption>Apple</figcaption>
-                    </figure>
-                    <h3 class="titulo">IPhone 18 Pro Max 256GB Negro Titanio</h3>
-                    <p><strong>$1,199.99</strong></p>
-                    <button type="button">Agregar al carrito</button>
-                    <table class="especificaciones">
-                        <caption>Especificaciones</caption>
-                        <thead>
-                            <tr>
-                                <th>Especificación</th>
-                                <th>Detalle</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Pantalla</td>
-                                <td>6.9 pulgadas Super Retina XDR</td>
-                            </tr>
-                            <tr>
-                                <td>Procesador</td>
-                                <td>Chip A19 Pro</td>
-                            </tr>
-                            <tr>
-                                <td>Memoria RAM</td>
-                                <td>12 GB</td>
-                            </tr>
-                            <tr>
-                                <td>Almacenamiento</td>
-                                <td>256 GB</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </article>
-            </div>
-        </section>
-            
-            <section id="compra">
-                <h2>Finalizar compra</h2>
-                <form>
-                    <fieldset class="envio">
-                        <legend>Datos de envio</legend>
-                        <p>
-                            <label for="nombre">Nombre completo</label><br/>
-                            <input type="" id="nombre" name="nombre" required minlength="3" autocomplete="name">
-                        </p>
-                        <p>
-                            <label for="email">Correo electronico</label><br/>
-                            <input type="" id="email" name="email" required autocomplete="email">
-                        </p>
-                        <p>
-                            <label for="direccion">Dirección</label><br/>
-                            <input type="" id="direccion" name="direccion" required autocomplete="direccion">
-                        </p>                                   
-                        <p>
-                            <label for="cantidad">Cantidad de unidades</label><br/>
-                            <input type="number" id="cantidad" name="cantidad" min="1" max="10" step="1" value="1" required>
-                        </p>
-                        <p class="campo-ancho">
-                            <label for="notas">Notas para el repartidor</label><br/>
-                            <textarea type="notas" id="notas" name="cantidad" rows="5" maxlength="200"></textarea>
-                        </p>
+      <!-- I2 - <table> de especificaciones en cada producto -->
+      <div class="grid grid-cols-1 grid-flow-dense gap-4 md:grid-cols-2 md:auto-rows-fr monitor:grid-cols-4">
 
-                        <div class="fila">
-                            <p>
-                                <label for="ciudad">Ciudad</label><br/>
-                                <input type="" id="ciudad" name="ciudad" list="ciudades" required autocomplete="ciudad">
+        <!-- Producto destacado -->
+        <article class="tarjeta group flex flex-col justify-center text-center
+                        bg-resalte border-marca border-2 md:col-span-2 md:row-span-2
+                        transition-[transform,box-shadow] duration-200
+                        hover:-translate-y-1 hover:shadow-lg dark:hover:ring-1 dark:hover:ring-marca
+                        animate-aparecer
+                        motion-reduce:transition-none motion-reduce:animate-none
+                        before:content-['Destacado'] before:inline-block before:self-center
+                        before:text-marca before:text-xs before:font-bold before:uppercase
+                        before:tracking-wider before:border before:border-marca
+                        before:rounded-full before:px-2.5 before:py-0.5 before:mb-2
+                        before:animate-latido motion-reduce:before:animate-none">
+          <figure class="mb-3">
+            <img class="w-full max-w-75 mx-auto aspect-square object-contain dark:brightness-90"
+                 src="https://www.appleperu.pe/wp-content/uploads/macbook-pro-retina.jpg"
+                 alt="MacBook Pro Retina" width="200" />
+            <figcaption class="text-xs font-semibold text-texto-suave uppercase tracking-wide">Apple</figcaption>
+          </figure>
+          <h3 class="text-lg leading-tight my-1 group-hover:text-marca">MacBook Pro Retina 13"</h3>
+          <p class="mb-3"><strong class="text-exito">$1,999.99</strong></p>
+          <button class="boton self-center mt-4" type="button">Agregar al carrito</button>
 
-                                <datalist id="ciudades">
-                                    <option value="Lima"></option>
-                                    <option value="Bogota"></option>
-                                    <option value="Ciudad de Mexico"></option>
-                                    <option value="Buenos Aires"></option>
-                                    <option value="Madrid"></option>
-                                </datalist>
-                            </p>
-                            <p>
-                                <label for="pais">País</label><br/>
-                                <select name="pais" id="pais" required>
-                                    <option value="">Elige un país</option>
-                                    <optgroup label="Paises disponibles">
-                                        <option value="pe">Perú</option>
-                                        <option value="co">Colombia</option>
-                                        <option value="mx">Mexico</option>
-                                        <option value="ar">Argentina</option>
-                                        <option value="es">España</option>
-                                    </optgroup>
-                                </select>
-                            </p>
-                        </div>
+          <table class="w-full table-fixed border-collapse text-sm my-6">
+            <caption class="caption-bottom mt-2 font-bold text-base">Especificaciones</caption>
+            <thead>
+              <tr>
+                <th class="celda bg-fondo-suave">Especificación</th>
+                <th class="celda bg-fondo-suave">Detalle</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="even:bg-fondo hover:bg-resalte"><td class="celda break-words">Pantalla</td><td class="celda break-words">13 pulgadas Retina</td></tr>
+              <tr class="even:bg-fondo hover:bg-resalte"><td class="celda break-words">Procesador</td><td class="celda break-words">Intel Core i5</td></tr>
+              <tr class="even:bg-fondo hover:bg-resalte"><td class="celda break-words">Memoria RAM</td><td class="celda break-words">8 GB</td></tr>
+              <tr class="even:bg-fondo hover:bg-resalte"><td class="celda break-words">Almacenamiento</td><td class="celda break-words">256 GB SSD</td></tr>
+            </tbody>
+          </table>
+        </article>
 
-                        <div class="fila">
-                            <p>
-                                <label for="telefono">Telefono</label><br/>
-                                <input type="tel" id="telefono" name="telefono"
-                                    pattern="[0-9]{7,}"
-                                    title="Solo números, al menos 7 digitos"
-                                    autocomplete="tel">
-                            </p>
-                            <p>
-                                <label for="fecha">Fecha de entrega deseada</label><br/>
-                                <input type="date" id="fecha" name="fecha">
-                            </p>
-                        </div>
-                    </fieldset>
-                    <!-- D1 - fieldset de facturación con Empresa y RUC -->
-                    <fieldset>
-                        <legend>Facturación</legend>
-                        <p>
-                            <label for="empresa">Empresa</label><br/>
-                            <input type="" id="empresa" name="empresa" minlength="3" autocomplete="empresa">
-                        </p>
-                        <p>
-                            <label for="ruc">RUC</label><br/>
-                            <input type="tel" pattern="[0-9]{11}" title="Solo números, al menos 11 digitos" autocomplete="ruc">
-                        </p>
-                    </fieldset>
-                    <fieldset>
-                        <legend>Metodo de pago</legend>
-                        <p>
-                            <input type="radio" id="pago-tarjeta" name="pago" value="tarjeta" required>
-                            <label for="pago-tarjeta">Tarjeta</label>
-                        </p>
-                        <p>
-                            <input type="radio" id="pago-paypal" name="pago" value="paypal" required>
-                            <label for="pago-paypal">PayPal</label>
-                        </p>
-                        <p>
-                            <input type="radio" id="pago-contra" name="pago" value="contraentrega" required>
-                            <label for="pago-contra">Contra entrega</label>
-                        </p>
-                    </fieldset>
-                    <p>
-                        <input type="checkbox" id="terminos" name="terminos" required>
-                        <label for="terminos">Acepto los términos y condiciones</label>
-                    </p>
-                    <button type="submit">Confirmar pedido</button>
-                </form>
-            </section>
-            <!-- D2 - Sección de preguntas frecuentes con <summary> y <details> -->
-            <section id="faq">
-                <h2>Preguntas frecuentes</h2>
-                <ul>
-                    <li>                
-                        <details>
-                            <summary>¿Qué métodos de pago aceptan?</summary>
-                            <p>Aceptamos tarjetas de crédito, tarjetas de débito y transferencias bancarias.</p>
-                        </details>
-                    </li>
-                    <li>                
-                        <details>
-                            <summary>¿Realizan envíos a todo el Perú?</summary>
-                            <p>Sí, realizamos envíos a diferentes ciudades del Perú. El tiempo de entrega depende de la ubicación.</p>
-                        </details>
-                    </li>
-                    <li>                
-                        <details>
-                            <summary>¿Cuánto tiempo demora la entrega?</summary>
-                            <p>Los pedidos en Lima pueden entregarse en aproximadamente 24 horas. Los envíos nacionales pueden demorar entre 3 y 5 días.</p>
-                        </details>
-                    </li>
-                    <li>                
-                        <details>
-                            <summary>¿Los productos tienen garantía?</summary>
-                            <p>Sí, nuestros productos cuentan con garantía según las condiciones establecidas por el fabricante.</p>
-                        </details>
-                    </li>
-                    <li>                
-                        <details>
-                            <summary>¿Puedo devolver un producto?</summary>
-                            <p>Sí, puedes solicitar la devolución siempre que se cumplan las condiciones establecidas en nuestra política de devoluciones.</p> </details>
-                        </details>
-                    </li>
-                </ol>
-            </section>
-        </main>
-        <aside>
-            <h2>Informacion de compra</h2>
-            <h3>Como comprar en 3 pasos</h3>
-            <ol>
-                <li>Selecciona el producto</li>
-                <li>Agrega al carrito</li>
-                <li>Confirma el pedido con tus datos de envio</li>
-            </ol>
-            <!-- I2 - Segunda <ol> en el <aside>-->
-            <h3>Cuidados del producto</h3>
-            <ol>
-                <li>Mantén el equipo limpio y libre de polvo.</li>
-                <li>Evita exponerlo a líquidos.</li>
-                <li>Utiliza accesorios compatibles.</li>
-                <li>Protege el equipo de golpes y caídas.</li>
-                <li>Guárdalo en un lugar seco y seguro.</li>
-            </ol>
+        <article class="tarjeta group flex flex-col text-center md:col-span-2
+                        transition-[transform,box-shadow] duration-200
+                        hover:-translate-y-1 hover:shadow-lg dark:hover:ring-1 dark:hover:ring-marca
+                        animate-aparecer
+                        motion-reduce:transition-none motion-reduce:animate-none">
+          <figure class="mb-3">
+            <img class="mx-auto aspect-square object-contain dark:brightness-90"
+                 src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcS1eCKck5yyiDW08v0Uuzc-LssM4iJC3ttkPCbGSW-JpuJpH_OtZoalXeRYyit1DX0tDM9PaF0aedQP_PSy8K1kUc2Un-b1pr0I8YTPaokJFTWsc5nwQYzluZwKWMaS0CKHa9SD7XUSLw&usqp=CAc"
+                 alt="MacBook Pro 14 pulgadas" width="200" />
+            <figcaption class="text-xs font-semibold text-texto-suave uppercase tracking-wide">Apple</figcaption>
+          </figure>
+          <h3 class="text-lg leading-tight my-1 group-hover:text-marca">MacBook Pro 14"</h3>
+          <p class="mb-3"><strong class="text-exito">$2,000.99</strong></p>
+          <button class="boton self-center mt-2" type="button">Agregar al carrito</button>
 
-            <h3>Costos de envio</h3>
-            <table>
-                <caption>Tarifas por zona</caption>
-                <thead>
-                    <tr>
-                        <th>Zona</th>
-                        <th>Tiempo</th>
-                        <th>Costo</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Lima</td>
-                        <td>24 horas</td>
-                        <td>Gratis</td>
-                    </tr>
-                    <tr>
-                        <td>Nacional</td>
-                        <td>3-5 dias</td>
-                        <td>$10.00</td>
-                    </tr>
-                    <tr>
-                        <td>Internacional</td>
-                        <td>7-14 dias</td>
-                        <td>$25.00</td>
-                    </tr>
-            </table>
-        </aside>
-        <footer>
-            <section>
-                <h3>Marca: </h3>
-                <p>Tienda de productos electrónicos.</p>
-            </section>
+          <table class="w-full table-fixed border-collapse text-sm my-6">
+            <caption class="caption-bottom mt-2 font-bold text-base">Especificaciones</caption>
+            <thead>
+              <tr>
+                <th class="celda bg-fondo-suave">Especificación</th>
+                <th class="celda bg-fondo-suave">Detalle</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="even:bg-fondo hover:bg-resalte"><td class="celda break-words">Pantalla</td><td class="celda break-words">14.2 pulgadas Liquid Retina XDR</td></tr>
+              <tr class="even:bg-fondo hover:bg-resalte"><td class="celda break-words">Procesador</td><td class="celda break-words">Apple M1 Pro</td></tr>
+              <tr class="even:bg-fondo hover:bg-resalte"><td class="celda break-words">Memoria RAM</td><td class="celda break-words">16 GB</td></tr>
+              <tr class="even:bg-fondo hover:bg-resalte"><td class="celda break-words">Almacenamiento</td><td class="celda break-words">512 GB SSD</td></tr>
+            </tbody>
+          </table>
+        </article>
 
-            <nav aria-label="Enlaces">
-                <h3>Enlaces: </h3>
-                <ul>
-                    <li><a href="#catalogo">Catálogo</a></li>
-                    <li><a href="#compra">Compra</a></li>
-                    <li><a href="nosotros.html">Nosotros</a></li>
-                    <li><a href="#faq">Preguntas frecuentes</a></li>
-                </ul>
-            </nav>
+        <article class="tarjeta group flex flex-col text-center
+                        transition-[transform,box-shadow] duration-200
+                        hover:-translate-y-1 hover:shadow-lg dark:hover:ring-1 dark:hover:ring-marca
+                        animate-aparecer
+                        motion-reduce:transition-none motion-reduce:animate-none">
+          <figure class="mb-3">
+            <img class="mx-auto aspect-square object-contain dark:brightness-90"
+                 src="https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111902_mbp14-silver2.png"
+                 alt="MacBook Pro 14 pulgadas color plata" width="200" />
+            <figcaption class="text-xs font-semibold text-texto-suave uppercase tracking-wide">Apple</figcaption>
+          </figure>
+          <h3 class="text-lg leading-tight my-1 group-hover:text-marca">MacBook Pro 14"</h3>
+          <p class="mb-3"><strong class="text-exito">$4,599.99</strong></p>
+          <button class="boton self-center mt-2" type="button">Agregar al carrito</button>
 
-            <address>
-                <h3>Contacto: </h3>
-                <a href="mailto:info@techcart.com">info@techcart.com</a>
-            </address>
-            <!--p>&copy; 2026 TechCart - Proyecto educativo</p>
-            <p> Datos e imagenes de <a href="https://dummyjson.com" target="_blank" rel="noopener noreferrer">DummyJson</a></p>
-            <address>Contacto: <a href="mailto:info@techcart.com">info@techcart.com</a></address -->
-        </footer>
+          <table class="w-full table-fixed border-collapse text-sm my-6">
+            <caption class="caption-bottom mt-2 font-bold text-base">Especificaciones</caption>
+            <thead>
+              <tr>
+                <th class="celda bg-fondo-suave">Especificación</th>
+                <th class="celda bg-fondo-suave">Detalle</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="even:bg-fondo hover:bg-resalte"><td class="celda break-words">Pantalla</td><td class="celda break-words">14.2 pulgadas Liquid Retina XDR</td></tr>
+              <tr class="even:bg-fondo hover:bg-resalte"><td class="celda break-words">Procesador</td><td class="celda break-words">Apple M3 Pro</td></tr>
+              <tr class="even:bg-fondo hover:bg-resalte"><td class="celda break-words">Memoria RAM</td><td class="celda break-words">18 GB</td></tr>
+              <tr class="even:bg-fondo hover:bg-resalte"><td class="celda break-words">Almacenamiento</td><td class="celda break-words">512 GB SSD</td></tr>
+            </tbody>
+          </table>
+        </article>
+
+        <article class="tarjeta group flex flex-col text-center
+                        transition-[transform,box-shadow] duration-200
+                        hover:-translate-y-1 hover:shadow-lg dark:hover:ring-1 dark:hover:ring-marca
+                        animate-aparecer
+                        motion-reduce:transition-none motion-reduce:animate-none">
+          <figure class="mb-3">
+            <img class="mx-auto aspect-square object-contain dark:brightness-90"
+                 src="https://www.appleperu.pe/wp-content/uploads/1990-1.jpg"
+                 alt="MacBook Pro" width="200" />
+            <figcaption class="text-xs font-semibold text-texto-suave uppercase tracking-wide">Apple</figcaption>
+          </figure>
+          <h3 class="text-lg leading-tight my-1 group-hover:text-marca">MacBook Pro 15"</h3>
+          <p class="mb-3"><strong class="text-exito">$1,009.99</strong></p>
+          <button class="boton self-center mt-2" type="button">Agregar al carrito</button>
+
+          <table class="w-full table-fixed border-collapse text-sm my-6">
+            <caption class="caption-bottom mt-2 font-bold text-base">Especificaciones</caption>
+            <thead>
+              <tr>
+                <th class="celda bg-fondo-suave">Especificación</th>
+                <th class="celda bg-fondo-suave">Detalle</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="even:bg-fondo hover:bg-resalte"><td class="celda break-words">Pantalla</td><td class="celda break-words">15.4 pulgadas Retina</td></tr>
+              <tr class="even:bg-fondo hover:bg-resalte"><td class="celda break-words">Procesador</td><td class="celda break-words">Intel Core i7</td></tr>
+              <tr class="even:bg-fondo hover:bg-resalte"><td class="celda break-words">Memoria RAM</td><td class="celda break-words">16 GB</td></tr>
+              <tr class="even:bg-fondo hover:bg-resalte"><td class="celda break-words">Almacenamiento</td><td class="celda break-words">512 GB SSD</td></tr>
+            </tbody>
+          </table>
+        </article>
+
+        <!-- F - Quinto producto con su <figure> y alt -->
+        <article class="tarjeta group flex flex-col text-center
+                        transition-[transform,box-shadow] duration-200
+                        hover:-translate-y-1 hover:shadow-lg dark:hover:ring-1 dark:hover:ring-marca
+                        animate-aparecer
+                        motion-reduce:transition-none motion-reduce:animate-none">
+          <figure class="mb-3">
+            <img class="mx-auto aspect-square object-contain dark:brightness-90"
+                 src="https://mac-center.com.pe/cdn/shop/files/IMG-21467994_m_jpeg_1_43a5f595-c136-4697-b7fd-fc91656c4546.jpg?v=1788983326&width=823"
+                 alt="iPhone 18 Pro Max 256GB Negro Titanio" width="200" />
+            <figcaption class="text-xs font-semibold text-texto-suave uppercase tracking-wide">Apple</figcaption>
+          </figure>
+          <h3 class="text-lg leading-tight my-1 group-hover:text-marca">iPhone 18 Pro Max 256GB Negro Titanio</h3>
+          <p class="mb-3"><strong class="text-exito">$1,199.99</strong></p>
+          <button class="boton self-center mt-2" type="button">Agregar al carrito</button>
+
+          <table class="w-full table-fixed border-collapse text-sm my-6">
+            <caption class="caption-bottom mt-2 font-bold text-base">Especificaciones</caption>
+            <thead>
+              <tr>
+                <th class="celda bg-fondo-suave">Especificación</th>
+                <th class="celda bg-fondo-suave">Detalle</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="even:bg-fondo hover:bg-resalte"><td class="celda break-words">Pantalla</td><td class="celda break-words">6.9 pulgadas Super Retina XDR</td></tr>
+              <tr class="even:bg-fondo hover:bg-resalte"><td class="celda break-words">Procesador</td><td class="celda break-words">Chip A19 Pro</td></tr>
+              <tr class="even:bg-fondo hover:bg-resalte"><td class="celda break-words">Memoria RAM</td><td class="celda break-words">12 GB</td></tr>
+              <tr class="even:bg-fondo hover:bg-resalte"><td class="celda break-words">Almacenamiento</td><td class="celda break-words">256 GB</td></tr>
+            </tbody>
+          </table>
+        </article>
+
+      </div>
+    </section>
+
+    <section id="compra" class="bg-tarjeta rounded-tarjeta p-6 mb-6">
+      <h2 class="titulo-seccion">Finalizar compra</h2>
+
+      <form class="md:grid md:grid-cols-[2fr_1fr] md:gap-4">
+
+        <fieldset class="border border-borde rounded-lg p-4 mb-4 md:mb-0 grid grid-cols-1 gap-x-4 md:grid-cols-2
+                         md:col-start-1 md:row-start-1 md:row-span-2">
+          <legend class="font-semibold px-1.5">Datos de envío</legend>
+
+          <p class="flex flex-wrap items-center gap-2 my-3 last:mb-0">
+            <label class="basis-full" for="nombre">Nombre completo</label>
+            <input class="campo" type="text" id="nombre" name="nombre" required minlength="3"
+                   autocomplete="name" />
+          </p>
+
+          <p class="flex flex-wrap items-center gap-2 my-3 last:mb-0">
+            <label class="basis-full" for="email">Correo electrónico</label>
+            <input class="campo" type="email" id="email" name="email" required autocomplete="email" />
+          </p>
+
+          <p class="flex flex-wrap items-center gap-2 my-3 last:mb-0">
+            <label class="basis-full" for="direccion">Dirección</label>
+            <input class="campo" type="text" id="direccion" name="direccion" required
+                   autocomplete="address-line1" />
+          </p>
+
+          <p class="flex flex-wrap items-center gap-2 my-3 last:mb-0">
+            <label class="basis-full" for="cantidad">Cantidad de unidades</label>
+            <input class="campo" type="number" id="cantidad" name="cantidad" min="1" max="10" step="1"
+                   value="1" required />
+          </p>
+
+          <p class="flex flex-wrap items-center gap-2 my-3 last:mb-0 col-span-full">
+            <label class="basis-full" for="notas">Notas para el repartidor</label>
+            <textarea class="campo resize-y" id="notas" name="notas" rows="5" maxlength="200"></textarea>
+          </p>
+
+          <div class="col-span-full grid grid-cols-2 gap-x-4">
+            <p class="flex flex-wrap items-center gap-2 my-3">
+              <label class="basis-full" for="ciudad">Ciudad</label>
+              <input class="campo" type="text" id="ciudad" name="ciudad" list="ciudades" required
+                     autocomplete="address-level2" />
+              <datalist id="ciudades">
+                <option value="Lima"></option>
+                <option value="Bogotá"></option>
+                <option value="Ciudad de México"></option>
+                <option value="Buenos Aires"></option>
+                <option value="Madrid"></option>
+              </datalist>
+            </p>
+            <p class="flex flex-wrap items-center gap-2 my-3">
+              <label class="basis-full" for="pais">País</label>
+              <select class="campo" id="pais" name="pais" required>
+                <option value="">Elige un país</option>
+                <optgroup label="Países disponibles">
+                  <option value="pe">Perú</option>
+                  <option value="co">Colombia</option>
+                  <option value="mx">México</option>
+                  <option value="ar">Argentina</option>
+                  <option value="es">España</option>
+                </optgroup>
+              </select>
+            </p>
+          </div>
+
+          <div class="col-span-full grid grid-cols-2 gap-x-4">
+            <p class="flex flex-wrap items-center gap-2 my-3 last:mb-0">
+              <label class="basis-full" for="telefono">Teléfono</label>
+              <input class="campo" type="tel" id="telefono" name="telefono" pattern="[0-9]{7,}"
+                     title="Solo números, al menos 7 dígitos" autocomplete="tel" />
+            </p>
+            <p class="flex flex-wrap items-center gap-2 my-3 last:mb-0">
+              <label class="basis-full" for="fecha">Fecha de entrega deseada</label>
+              <input class="campo" type="date" id="fecha" name="fecha" />
+            </p>
+          </div>
+        </fieldset>
+
+        <!-- D1 - fieldset de facturación con Empresa y RUC -->
+        <fieldset class="border border-borde rounded-lg p-4 mb-4 md:mb-0 md:col-span-2 md:row-start-3">
+          <legend class="font-semibold px-1.5">Facturación</legend>
+
+          <p class="flex flex-wrap items-center gap-2 my-3 last:mb-0">
+            <label class="basis-full" for="empresa">Empresa</label>
+            <input class="campo" type="text" id="empresa" name="empresa" minlength="3"
+                   autocomplete="organization" />
+          </p>
+          <p class="flex flex-wrap items-center gap-2 my-3 last:mb-0">
+            <label class="basis-full" for="ruc">RUC</label>
+            <input class="campo" type="text" id="ruc" name="ruc" inputmode="numeric"
+                   pattern="[0-9]{11}" title="Solo números, 11 dígitos" autocomplete="off" />
+          </p>
+        </fieldset>
+
+        <fieldset class="border border-borde rounded-lg p-4 mb-4 md:mb-0 md:col-start-2 md:row-start-1 md:self-start">
+          <legend class="font-semibold px-1.5">Método de pago</legend>
+
+          <p class="flex flex-wrap items-center gap-2 my-3 last:mb-0">
+            <input class="shrink-0 focus-visible:outline-3 focus-visible:outline-marca focus-visible:outline-offset-2"
+                   type="radio" id="pago-tarjeta" name="pago" value="tarjeta" required />
+            <label for="pago-tarjeta">Tarjeta</label>
+          </p>
+          <p class="flex flex-wrap items-center gap-2 my-3 last:mb-0">
+            <input class="shrink-0 focus-visible:outline-3 focus-visible:outline-marca focus-visible:outline-offset-2"
+                   type="radio" id="pago-paypal" name="pago" value="paypal" />
+            <label for="pago-paypal">PayPal</label>
+          </p>
+          <p class="flex flex-wrap items-center gap-2 my-3 last:mb-0">
+            <input class="shrink-0 focus-visible:outline-3 focus-visible:outline-marca focus-visible:outline-offset-2"
+                   type="radio" id="pago-contra" name="pago" value="contraentrega" />
+            <label for="pago-contra">Contra entrega</label>
+          </p>
+        </fieldset>
+
+        <p class="flex flex-wrap items-center gap-2 my-3 md:my-0 md:col-start-2 md:row-start-2 md:self-start">
+          <input class="shrink-0 focus-visible:outline-3 focus-visible:outline-marca focus-visible:outline-offset-2"
+                 type="checkbox" id="terminos" name="terminos" required />
+          <label for="terminos">Acepto los términos y condiciones</label>
+        </p>
+
+        <button class="boton bg-exito text-lg disabled:opacity-50 disabled:cursor-not-allowed
+                       md:col-span-2 md:row-start-4 md:justify-self-start"
+                type="submit">Confirmar pedido</button>
+      </form>
+    </section>
+
+    <!-- D2 - Sección de preguntas frecuentes con <summary> y <details> -->
+    <section id="faq" class="tarjeta p-6 mb-6">
+      <h2 class="titulo-seccion mb-4">Preguntas frecuentes</h2>
+
+      <ul class="grid gap-4">
+        <li>
+          <details>
+            <summary class="cursor-pointer list-none text-center text-marca font-bold tracking-wide border border-marca rounded-full px-2.5 py-0.5
+                            focus-visible:outline-3 focus-visible:outline-marca focus-visible:outline-offset-2">
+              ¿Qué métodos de pago aceptan?</summary>
+            <p class="mt-2 font-medium text-texto-suave before:content-['>_'] before:text-[1.1rem]">Aceptamos tarjetas de crédito, tarjetas de débito y transferencias bancarias.</p>
+          </details>
+        </li>
+        <li>
+          <details>
+            <summary class="cursor-pointer list-none text-center text-marca font-bold tracking-wide border border-marca rounded-full px-2.5 py-0.5
+                            focus-visible:outline-3 focus-visible:outline-marca focus-visible:outline-offset-2">
+              ¿Realizan envíos a todo el Perú?</summary>
+            <p class="mt-2 font-medium text-texto-suave before:content-['>_'] before:text-[1.1rem]">Sí, realizamos envíos a diferentes ciudades del Perú. El tiempo de entrega depende de la ubicación.</p>
+          </details>
+        </li>
+        <li>
+          <details>
+            <summary class="cursor-pointer list-none text-center text-marca font-bold tracking-wide border border-marca rounded-full px-2.5 py-0.5
+                            focus-visible:outline-3 focus-visible:outline-marca focus-visible:outline-offset-2">
+              ¿Cuánto tiempo demora la entrega?</summary>
+            <p class="mt-2 font-medium text-texto-suave before:content-['>_'] before:text-[1.1rem]">Los pedidos en Lima pueden entregarse en aproximadamente 24 horas. Los envíos nacionales pueden demorar entre 3 y 5 días.</p>
+          </details>
+        </li>
+        <li>
+          <details>
+            <summary class="cursor-pointer list-none text-center text-marca font-bold tracking-wide border border-marca rounded-full px-2.5 py-0.5
+                            focus-visible:outline-3 focus-visible:outline-marca focus-visible:outline-offset-2">
+              ¿Los productos tienen garantía?</summary>
+            <p class="mt-2 font-medium text-texto-suave before:content-['>_'] before:text-[1.1rem]">Sí, nuestros productos cuentan con garantía según las condiciones establecidas por el fabricante.</p>
+          </details>
+        </li>
+        <li>
+          <details>
+            <summary class="cursor-pointer list-none text-center text-marca font-bold tracking-wide border border-marca rounded-full px-2.5 py-0.5
+                            focus-visible:outline-3 focus-visible:outline-marca focus-visible:outline-offset-2">
+              ¿Puedo devolver un producto?</summary>
+            <p class="mt-2 font-medium text-texto-suave before:content-['>_'] before:text-[1.1rem]">Sí, puedes solicitar la devolución siempre que se cumplan las condiciones establecidas en nuestra política de devoluciones.</p>
+          </details>
+        </li>
+      </ul>
+    </section>
+
+  </main>
+
+  <aside class="flex flex-col items-stretch gap-2 bg-tarjeta border border-borde rounded-tarjeta p-6 overflow-x-auto">
+    <h2 class="titulo-seccion">Información de compra</h2>
+
+    <h3 class="text-lg leading-tight mt-4">Cómo comprar en 3 pasos</h3>
+    <ol class="list-decimal pl-6">
+      <li>Selecciona el producto</li>
+      <li>Agrega al carrito</li>
+      <li>Confirma el pedido con tus datos de envío</li>
+    </ol>
+
+    <!-- I2 - Segunda <ol> en el <aside> -->
+    <h3 class="text-lg leading-tight mt-4">Cuidados del producto</h3>
+    <ol class="list-decimal pl-6">
+      <li>Mantén el equipo limpio y libre de polvo.</li>
+      <li>Evita exponerlo a líquidos.</li>
+      <li>Utiliza accesorios compatibles.</li>
+      <li>Protege el equipo de golpes y caídas.</li>
+      <li>Guárdalo en un lugar seco y seguro.</li>
+    </ol>
+
+    <h3 class="text-lg leading-tight mt-4">Costos de envío</h3>
+    <table class="w-full border-collapse text-sm">
+      <caption class="caption-bottom font-semibold text-left mt-2">Tarifas por zona</caption>
+      <thead>
+        <tr>
+          <th class="celda bg-fondo-suave">Zona</th>
+          <th class="celda bg-fondo-suave">Tiempo</th>
+          <th class="celda bg-fondo-suave text-right">Costo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="even:bg-fondo hover:bg-resalte">
+          <td class="celda">Lima</td>
+          <td class="celda">24 horas</td>
+          <td class="celda text-right">Gratis</td>
+        </tr>
+        <tr class="even:bg-fondo hover:bg-resalte">
+          <td class="celda">Nacional</td>
+          <td class="celda">3-5 días</td>
+          <td class="celda text-right">$10.00</td>
+        </tr>
+        <tr class="even:bg-fondo hover:bg-resalte">
+          <td class="celda">Internacional</td>
+          <td class="celda">7-14 días</td>
+          <td class="celda text-right">$25.00</td>
+        </tr>
+      </tbody>
+    </table>
+  </aside>
+
+  <footer class="grid grid-cols-1 items-start gap-6 py-6 border-t border-borde text-sm text-texto-suave md:grid-cols-3">
+    <div>
+      <h3 class="text-base leading-tight mb-1 text-texto">Marca:</h3>
+      <p><span class="text-marca font-bold text-xl">TechCart</span> - Tienda de productos electrónicos.</p>
+    </div>
+
+    <div>
+      <h3 class="text-base leading-tight mb-1 text-texto">Enlaces:</h3>
+      <nav aria-label="Enlaces">
+        <ul class="flex flex-col gap-1">
+          <li><a class="text-marca hover:underline" href="#catalogo">Catálogo</a></li>
+          <li><a class="text-marca hover:underline" href="#compra">Compra</a></li>
+          <li><a class="text-marca hover:underline" href="nosotros.html">Nosotros</a></li>
+          <li><a class="text-marca hover:underline" href="#faq">Preguntas frecuentes</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div>
+      <h3 class="text-base leading-tight mb-1 text-texto">Contacto:</h3>
+      <address class="not-italic">
+        <a class="text-marca hover:underline" href="mailto:info@techcart.com">info@techcart.com</a>
+      </address>
+    </div>
+  </footer>
+
 </body>
 </html>
