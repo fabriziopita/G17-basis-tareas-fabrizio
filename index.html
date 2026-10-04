@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,7 +10,8 @@
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script type="module" src="./js/main.js"></script>
   <style type="text/tailwindcss">
-
+    @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+    
     @theme {
       --color-marca:        #12c79a;
       --color-sobre-marca:  #fff;
@@ -24,6 +25,8 @@
       --color-texto:        #1d1d1f;
       --color-texto-suave:  #6e6e73;
       --color-borde:        #d2d2d7;
+
+      --color-oferta:     #ff5c7a;
 
       --radius-tarjeta: 12px;
 
@@ -40,8 +43,7 @@
       --container-ancha:  1280px;
     }
 
-    @media (prefers-color-scheme: dark) {
-      :root {
+    [data-theme="dark"]  {
         --color-marca:        #00e6b8;
         --color-sobre-marca:  #071512;
         --color-exito:        #39ff88;
@@ -54,7 +56,8 @@
         --color-texto:        #eef1f5;
         --color-texto-suave:  #a8adbb;
         --color-borde:        #353a49;
-      }
+
+        --color-oferta:     #ff5c7a;
     }
 
     @layer components {
@@ -87,6 +90,9 @@
                after:bg-marca after:mt-1;
       }
 
+      /* Usamos este componente para evitar redundancia en el código
+      y mantenerlo más organizado, haciendo que todas las tablas
+      tengan estilos base consistentes y fáciles de modificar. */
       .celda {
         @apply border border-borde px-2 py-1.5 text-left;
       }
@@ -184,11 +190,11 @@
                         before:animate-latido motion-reduce:before:animate-none">
           <figure class="mb-3">
             <img class="w-full max-w-75 mx-auto aspect-square object-contain dark:brightness-90"
-                 src="https://www.appleperu.pe/wp-content/uploads/macbook-pro-retina.jpg"
-                 alt="MacBook Pro Retina" width="200" />
+                 src="https://cdn.dummyjson.com/product-images/laptops/apple-macbook-pro-14-inch-space-grey/thumbnail.webp"
+                 alt="MacBook Pro 14 pulgadas gris espacial" width="200" />
             <figcaption class="text-xs font-semibold text-texto-suave uppercase tracking-wide">Apple</figcaption>
           </figure>
-          <h3 class="text-lg leading-tight my-1 group-hover:text-marca">MacBook Pro Retina 13"</h3>
+          <h3 class="text-lg leading-tight my-1 group-hover:text-marca">MacBook Pro 14"</h3>
           <p class="mb-3"><strong class="text-exito">$1,999.99</strong></p>
           <button class="boton self-center mt-4" type="button">Agregar al carrito</button>
 
@@ -212,16 +218,16 @@
         <article class="tarjeta group flex flex-col text-center md:col-span-2
                         transition-[transform,box-shadow] duration-200
                         hover:-translate-y-1 hover:shadow-lg dark:hover:ring-1 dark:hover:ring-marca
-                        animate-aparecer
+                        animate-aparecer [animation-delay:100ms]
                         motion-reduce:transition-none motion-reduce:animate-none">
           <figure class="mb-3">
             <img class="mx-auto aspect-square object-contain dark:brightness-90"
-                 src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcS1eCKck5yyiDW08v0Uuzc-LssM4iJC3ttkPCbGSW-JpuJpH_OtZoalXeRYyit1DX0tDM9PaF0aedQP_PSy8K1kUc2Un-b1pr0I8YTPaokJFTWsc5nwQYzluZwKWMaS0CKHa9SD7XUSLw&usqp=CAc"
-                 alt="MacBook Pro 14 pulgadas" width="200" />
+                src="https://cdn.dummyjson.com/product-images/smartphones/iphone-13-pro/thumbnail.webp"
+                alt="iPhone 13 Pro" width="200" />
             <figcaption class="text-xs font-semibold text-texto-suave uppercase tracking-wide">Apple</figcaption>
           </figure>
-          <h3 class="text-lg leading-tight my-1 group-hover:text-marca">MacBook Pro 14"</h3>
-          <p class="mb-3"><strong class="text-exito">$2,000.99</strong></p>
+          <h3 class="text-lg leading-tight my-1 group-hover:text-marca">iPhone 13 Pro</h3>
+          <p class="mb-3"><strong class="text-exito">$1,099.99</strong></p>
           <button class="boton self-center mt-2" type="button">Agregar al carrito</button>
 
           <table class="w-full table-fixed border-collapse text-sm my-6">
@@ -243,17 +249,22 @@
 
         <article class="tarjeta group flex flex-col text-center
                         transition-[transform,box-shadow] duration-200
-                        hover:-translate-y-1 hover:shadow-lg dark:hover:ring-1 dark:hover:ring-marca
-                        animate-aparecer
-                        motion-reduce:transition-none motion-reduce:animate-none">
+                        hover:-translate-y-1 hover:shadow-lg dark:hover:ring-1 dark:hover:ring-oferta
+                        animate-aparecer [animation-delay:200ms]
+                        motion-reduce:transition-none motion-reduce:animate-none
+                        before:content-['Oferta'] before:inline-block before:self-center
+                        before:text-oferta before:text-xs before:font-bold before:uppercase
+                        before:tracking-wider before:border before:border-oferta
+                        before:rounded-full before:px-2.5 before:py-0.5 before:mb-2
+                        before:animate-latido motion-reduce:before:animate-none">
           <figure class="mb-3">
             <img class="mx-auto aspect-square object-contain dark:brightness-90"
-                 src="https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111902_mbp14-silver2.png"
-                 alt="MacBook Pro 14 pulgadas color plata" width="200" />
+                 src="https://cdn.dummyjson.com/product-images/tablets/ipad-mini-2021-starlight/thumbnail.webp"
+                 alt="iPad Mini 2021" width="200" />
             <figcaption class="text-xs font-semibold text-texto-suave uppercase tracking-wide">Apple</figcaption>
           </figure>
-          <h3 class="text-lg leading-tight my-1 group-hover:text-marca">MacBook Pro 14"</h3>
-          <p class="mb-3"><strong class="text-exito">$4,599.99</strong></p>
+          <h3 class="text-lg leading-tight my-1 group-hover:text-marca">iPad Mini 2021</h3>
+          <p class="mb-3"><strong class="text-exito">$499.99</strong></p>
           <button class="boton self-center mt-2" type="button">Agregar al carrito</button>
 
           <table class="w-full table-fixed border-collapse text-sm my-6">
@@ -276,16 +287,16 @@
         <article class="tarjeta group flex flex-col text-center
                         transition-[transform,box-shadow] duration-200
                         hover:-translate-y-1 hover:shadow-lg dark:hover:ring-1 dark:hover:ring-marca
-                        animate-aparecer
+                        animate-aparecer [animation-delay:300ms]
                         motion-reduce:transition-none motion-reduce:animate-none">
           <figure class="mb-3">
             <img class="mx-auto aspect-square object-contain dark:brightness-90"
-                 src="https://www.appleperu.pe/wp-content/uploads/1990-1.jpg"
-                 alt="MacBook Pro" width="200" />
+                 src="https://cdn.dummyjson.com/product-images/mobile-accessories/apple-airpods-max-silver/thumbnail.webp"
+                 alt="AirPods Max plateados" width="200" />
             <figcaption class="text-xs font-semibold text-texto-suave uppercase tracking-wide">Apple</figcaption>
           </figure>
-          <h3 class="text-lg leading-tight my-1 group-hover:text-marca">MacBook Pro 15"</h3>
-          <p class="mb-3"><strong class="text-exito">$1,009.99</strong></p>
+          <h3 class="text-lg leading-tight my-1 group-hover:text-marca">AirPods Max</h3>
+          <p class="mb-3"><strong class="text-exito">$549.99</strong></p>
           <button class="boton self-center mt-2" type="button">Agregar al carrito</button>
 
           <table class="w-full table-fixed border-collapse text-sm my-6">
