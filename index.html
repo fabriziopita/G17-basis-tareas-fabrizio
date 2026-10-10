@@ -116,7 +116,7 @@
         <!-- D2 - Sección de preguntas frecuentes con <summary> y <details> -->
         <li><a class="text-marca font-semibold no-underline hover:underline" href="#faq">Preguntas frecuentes</a></li>
       </ul>
-      <p id=""resumen-carrito" class=""font-semibold m-0" role="status" aria-live="polite"></p>
+      <p id="resumen-carrito" class=""font-semibold m-0" role="status" aria-live="polite"></p>
      </nav>
 
     <button class="boton inline-flex items-center justify-center gap-2" type="button">
@@ -173,7 +173,7 @@
 
     <section id="catalogo">
       <h2 class="titulo-seccion">Catálogo de productos</h2>
-
+      <div id="estado-catalogo" role="status" aria-live="polite"></div>
       <div id="catalogo-grid" class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-y-6 gap-x-4 md:auto-rows-fr">
       </div>
 
@@ -192,7 +192,7 @@
     <section id="compra" class="bg-tarjeta rounded-tarjeta p-6 mb-6">
       <h2 class="titulo-seccion">Finalizar compra</h2>
 
-      <form class="md:grid md:grid-cols-[2fr_1fr] md:gap-4">
+      <form id="form-compra" novalidate class="md:grid md:grid-cols-[2fr_1fr] md:gap-4">
 
         <fieldset class="border border-borde rounded-lg p-4 mb-4 md:mb-0 grid grid-cols-1 gap-x-4 md:grid-cols-2
                          md:col-start-1 md:row-start-1 md:row-span-2">
@@ -312,6 +312,7 @@
         <button class="boton bg-exito text-lg disabled:opacity-50 disabled:cursor-not-allowed
                        md:col-span-2 md:row-start-4 md:justify-self-start"
                 type="submit">Confirmar pedido</button>
+        <div id="estado-pedido" class="mt-3" role="status" aria-live="polite"></div>
       </form>
     </section>
 

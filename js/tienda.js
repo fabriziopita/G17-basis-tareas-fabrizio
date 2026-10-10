@@ -1,5 +1,5 @@
 export const IGV = 0.18;
-export const ENVIO_GRATIS_DESDE = 50;
+export const ENVIO_GRATIS_DESDE = 1050;
 
 export const precioConIgv = (precio) => precio * (1 + IGV);
 

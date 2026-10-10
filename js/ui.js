@@ -23,14 +23,14 @@ const CLASES_OFERTA = "tarjeta group flex flex-col text-center " +
   "before:rounded-full before:px-2.5 before:py-0.5 before:mb-2 " +
   "before:animate-latido motion-reduce:before:animate-none";
 
-export const tarjetaProducto = ({destacado, oferta, id, imagen, alt, nombre, precio, stock, dobleColumna, especificaciones: { pantalla, procesador, memoria, almacenamiento } = {}}) => `
+export const tarjetaProducto = ({destacado, oferta, id, imagen, alt, nombre, marca, precio, stock, dobleColumna, especificaciones: { peso, dimensiones, garantia, disponibilidad } = {}}) => `
   <article class="${oferta ? CLASES_OFERTA : `${CLASES_TARJETA} ${destacado ? CLASES_DESTACADA : ""}`} ${dobleColumna ? "md:col-span-2" : ""}" data-id="${id}">
     <figure class="mb-3">
       ${ imagen 
         ? `<img class="${destacado ? "w-full max-w-75 " : ""}mx-auto aspect-square object-contain dark:brightness-90" src="${imagen}" alt="${alt}" width="200" />` 
         : `<div class="w-full aspect-square place-items-center text-5xl bg-fondo rounded-lg" aria-hidden="true">nada</div>` 
       }
-      <figcaption class="text-xs font-semibold text-texto-suave uppercase tracking-wide">Apple</figcaption>
+      <figcaption class="text-xs font-semibold text-texto-suave uppercase tracking-wide">${marca}</figcaption>
     </figure>
     
     <h3 class="text-lg leading-tight my-1 group-hover:text-marca">${nombre}</h3>
@@ -54,24 +54,43 @@ export const tarjetaProducto = ({destacado, oferta, id, imagen, alt, nombre, pre
         </tr>
       </thead>
       <tbody>
-        <tr class="even:bg-fondo hover:bg-resalte"><td class="celda break-words">Pantalla</td><td class="celda break-words">${pantalla || "No disponible"}</td></tr>
-        <tr class="even:bg-fondo hover:bg-resalte"><td class="celda break-words">Procesador</td><td class="celda break-words">${procesador || "No disponible"}</td></tr>
-        <tr class="even:bg-fondo hover:bg-resalte"><td class="celda break-words">Memoria RAM</td><td class="celda break-words">${memoria || "No disponible"}</td></tr>
-        <tr class="even:bg-fondo hover:bg-resalte"><td class="celda break-words">Almacenamiento</td><td class="celda break-words">${almacenamiento || "No disponible"}</td></tr>
+        <tr class="even:bg-fondo hover:bg-resalte"><td class="celda break-words">Peso</td><td class="celda break-words">${peso || "No disponible"}</td></tr>
+        <tr class="even:bg-fondo hover:bg-resalte"><td class="celda break-words">Dimensiones</td><td class="celda break-words">${dimensiones || "No disponible"}</td></tr>
+        <tr class="even:bg-fondo hover:bg-resalte"><td class="celda break-words">Garantia</td><td class="celda break-words">${garantia || "No disponible"}</td></tr>
+        <tr class="even:bg-fondo hover:bg-resalte"><td class="celda break-words">Disponibilidad</td><td class="celda break-words">${disponibilidad || "No disponible"}</td></tr>
       </tbody>
     </table>
   </article>
 `;
 
-export const filaCarrito=({nombre,precio},indice) => `
+export const filaCarrito = ({nombre, precio}, indice) => `
       <li class="flex flex-wrap items-center justify-between gap-2 border-b border-borde py-2">
-        <span>${nombre}</span>
-        <span class="flex items-center gap-3">
-          <strong class="text-exito">${formatearPrecio(precio)}</strong>
-          <button class="boton text-sm" type="button" data-accion="quitar" 
-            data-posicion="${indice}" aria-label="Quitar ${nombre} del carrito">
-          Quitar
-          </button>
-        </span>
+          <span>${nombre}</span>
+            <span class="flex items-center gap-3">
+                <strong class="text-exito">${formatearPrecio(precio)}</strong>
+                <button class="boton text-sm" type="button" data-accion="quitar" 
+                    data-posicion="${indice}" aria-label="Quitar ${nombre} del carrito">
+                  Quitar
+              </button>
+          </span>
       </li>
 `;
+
+export const esqueletoTarjeta = () => `
+      <article class="tarjeta flex flex-col animate-pulse motion-reduce:animate-none" aria-hidden="true">
+        <div class="w-full aspect-square bg-fondo-suave rounded-lg mb-3"></div>
+        <div class="h-3 w-1/2 self-center bg-fondo-suave rounded-full mb-2"></div>
+        <div class="h-4 w-3/2 self-center bg-fondo-suave rounded-full mb-2"></div>
+        <div class="h-3 w-1/3 self-center bg-fondo-suave rounded-full mb-4"></div>
+        <div class="h-9 w-2/3 self-center bg-fondo-suave rounded-full mt-auto"></div>
+      </article>
+`;
+
+export const avisoCatalogo = (texto) => `
+      <p class="text-sum text-texto-sueva my-3">${texto}</p>
+  `;
+
+export const avisoError = (mensaje) => `
+      <p class="font-semibold text-error mb-3">${mensaje}</p>
+      <button class="boton" type="button" data-accion="reintentar">Reintentar</button>
+`

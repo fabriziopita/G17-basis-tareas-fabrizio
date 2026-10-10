@@ -1,5 +1,5 @@
-export const categorias = ["laptops", "smartphones", "tablets", "audio"];
-export const productos = [
+export const categorias = ["laptops", "smartphones", "tablets", "mobile-accesories"];
+/*export const productos = [
     {id: 1, nombre: "Macbook Pro 14", marca:"Apple",precio: 1999.99, categoria: "laptops", stock: 5, destacado: true, 
         envio : {zona: "Lima", dias : 1}, 
         imagen: "https://cdn.dummyjson.com/product-images/laptops/apple-macbook-pro-14-inch-space-grey/thumbnail.webp",
@@ -36,7 +36,7 @@ export const productos = [
             almacenamiento: "512 GB SSD"
         }
     },
-    {id: 4, nombre: "AirPods Max", marca:"Apple",precio: 549.99, categoria: "audio", stock: 3, destacado: false,
+    {id: 4, nombre: "AirPods Max", marca:"Apple",precio: 549.99, categoria: "mobile-accesories", stock: 3, destacado: false,
         envio: {zona: "Lima", dias: 1}, 
         imagen: "https://cdn.dummyjson.com/product-images/mobile-accessories/apple-airpods-max-silver/thumbnail.webp",
         alt : "AirPods Max plateados",
@@ -62,8 +62,16 @@ export const productos = [
     },
     {id: 6, nombre: "AirPods Max plateados", marca:"Apple",precio: 1299.99, categoria: "laptops", stock: 0, destacado: false, 
         envio: {zona: "Resto del Peru", dias: 4}, 
+        imagen: "https://cdn.dummyjson.com/product-images/laptops/airpods-max-silver/thumbnail.webp",
+        alt: "AirPods Max plateados",
+        especificaciones: {
+            pantalla: "15.4 pulgadas Retina",
+            procesador: "Intel Core i7",
+            memoria: "16 GB",
+            almacenamiento: "512 GB SSD"
+        }
     }
-];
+];*/
 
 export const contarPorCategoria = (items) => 
     items.reduce((cuenta, {categoria}) => ({...cuenta, [categoria] : (cuenta[categoria] ?? 0) + 1}),{});
