@@ -63,17 +63,17 @@ export const tarjetaProducto = ({destacado, oferta, id, imagen, alt, nombre, mar
   </article>
 `;
 
-export const filaCarrito = ({nombre, precio}, indice) => `
-      <li class="flex flex-wrap items-center justify-between gap-2 border-b border-borde py-2">
-          <span>${nombre}</span>
-            <span class="flex items-center gap-3">
-                <strong class="text-exito">${formatearPrecio(precio)}</strong>
-                <button class="boton text-sm" type="button" data-accion="quitar" 
-                    data-posicion="${indice}" aria-label="Quitar ${nombre} del carrito">
-                  Quitar
-              </button>
-          </span>
-      </li>
+export const filaCarrito = ({id, nombre, precio, cantidad}) => `
+    <li class="flex flex-wrap items-center justify-between gap-2 border-b border-borde py-2">
+        <span>${nombre} × ${cantidad}</span>
+        <span class="flex items-center gap-3">
+            <strong class="text-exito">${formatearPrecio(precio * cantidad)}</strong>
+            <button class="boton text-sm" type="button" data-accion="quitar"
+                data-id="${id}" aria-label="Quitar ${nombre} del carrito">
+                Quitar
+            </button>
+        </span>
+    </li>
 `;
 
 export const esqueletoTarjeta = () => `
@@ -87,7 +87,7 @@ export const esqueletoTarjeta = () => `
 `;
 
 export const avisoCatalogo = (texto) => `
-      <p class="text-sum text-texto-sueva my-3">${texto}</p>
+      <p class="text-sum text-texto-suave my-3">${texto}</p>
   `;
 
 export const avisoError = (mensaje) => `

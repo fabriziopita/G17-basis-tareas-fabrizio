@@ -1,12 +1,29 @@
 import {IGV, ENVIO_GRATIS_DESDE, costoDeEnvio, sumar} from "./tienda.js";
 export const CLAVE_CARRITO = "techcart_carrito";
 
-export const agregarAlCarrito = (carrito, producto) => [...carrito, producto];
-export const quitarDelCarrito = (carrito, posicion) => carrito.filter((producto, i) => i !== posicion);
+export const agregarAlCarrito = (carrito, producto) => {
+    const productoExistente = carrito.find(p => p.id === producto.id);
+
+    if (productoExistente) {
+        return carrito.map(p => p.id === producto.id ? { ...p, cantidad: p.cantidad + 1 } : p);
+    }
+
+    return [...carrito, { ...producto, cantidad: 1 }];
+};
+
+export const quitarDelCarrito = (carrito, id) => {
+    const productoExistente = carrito.find(p => p.id === id);
+
+    if (productoExistente && productoExistente.cantidad > 1) {
+        return carrito.map(p => p.id === id ? { ...p, cantidad: p.cantidad - 1 } : p);
+    }
+
+    return carrito.filter(p => p.id !== id);
+};
 
 export const resumenCarrito = (carrito) => {
-    const unidades = carrito.length;
-    const subTotal = sumar(...carrito.map(({precio}) => precio))
+    const unidades = carrito.reduce((total, p) => total + p.cantidad, 0);
+    const subTotal = sumar(...carrito.map(({precio, cantidad}) => precio * cantidad));
     const igv = subTotal * IGV;
     const envio = unidades === 0 ? 0 : costoDeEnvio(subTotal);
     return {unidades, subTotal, igv, envio, total : subTotal + igv + envio}

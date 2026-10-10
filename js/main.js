@@ -15,7 +15,41 @@ const grillaCatalogo = document.querySelector("#catalogo-grid");
 const estadoCatalogo = document.querySelector("#estado-catalogo")
 
 const tarjetasAlCargar = document.querySelectorAll(".tarjeta");
-console.log("Tarjeta en la pagina recien cargada : " + tarjetasAlCargar.length);
+
+const barraCategorias = document.querySelector("#categorias");
+
+/* Tema de pagina */
+
+const barraTema = document.querySelector("#alternar-tema");
+
+const CLAVE_TEMA = "techcart_tema";
+
+const leerTema = () => {
+    try {
+        return localStorage.getItem(CLAVE_TEMA);
+    } catch (error) {
+        console.warn("El tema no se pudo obtener:", error.message);
+        return null;
+    }
+};
+
+const temaSistema = window.matchMedia("(prefers-color-scheme: dark)").matches ? "oscuro" : "claro";
+
+document.documentElement.classList.toggle("dark", (leerTema() ?? temaSistema) === "oscuro");
+
+barraTema.addEventListener("click", () => {
+    document.documentElement.classList.toggle("dark");
+
+    const tema = document.documentElement.classList.contains("dark") ? "oscuro" : "claro";
+
+    try {
+        localStorage.setItem(CLAVE_TEMA, tema);
+    } catch (error) {
+        console.warn("El tema no se pudo guardar correctamente:", error.message);
+    }
+});
+
+/* Resto */
 
 let catalogo = [];
 const mensajeDeError = (error) => {
@@ -32,6 +66,13 @@ const pintarCatalogo = (lista = catalogo) => {
     const html = lista.map(tarjetaProducto).join("");
     grillaCatalogo.innerHTML="";
     grillaCatalogo.insertAdjacentHTML("beforeEnd", html);
+
+    if (lista.length === 0) {
+        const p = document.createElement("p");
+        p.textContent = `Sin resultados`;
+        p.classList.add("text-sum", "text-marca", "text-lg");
+        grillaCatalogo.append(p);
+    }
 
     grillaCatalogo.setAttribute("aria-label", `Catalogo con ${lista.length} productos`);
 }
@@ -84,7 +125,7 @@ let carrito = leerCarrito();
 
 const pintarCarrito=() => {
     const{unidades,subTotal,igv,envio,total} = resumenCarrito(carrito);
-    resumenCabecera.textContent = unidades === 0 ? "Carrito vacio" : `${unidades} productos(s) - ${formatearPrecio(total)}`;
+    resumenCabecera.textContent = unidades === 0 ? "0" : `${unidades}`;
     listaCarrito.innerHTML = carrito.map(filaCarrito).join("");
     console.log(filaCarrito);
     totalCarrito.textContent = unidades === 0 ? "Todavia no agregaste nada." :
@@ -120,8 +161,8 @@ listaCarrito.addEventListener('click', (evento) => {
     const boton = evento.target.closest("button[data-accion='quitar']");
     if(!boton) return;
 
-    carrito = quitarDelCarrito(carrito, Number(boton.dataset.posicion));
-    guardarCarrito();
+    carrito = quitarDelCarrito(carrito, Number(boton.dataset.id));
+    guardarCarrito(carrito);
     pintarCarrito();
 });
 
@@ -164,6 +205,17 @@ formularioCompra.addEventListener("submit", (evento) =>{
         ` +
         `por ${formatearPrecio(total)} quedo regristado.`, false
     )
+})
+
+barraCategorias.addEventListener('click', (evento) =>{
+    const enlace = evento.target.closest("a");
+    if(!enlace) return;
+
+    const categoriaObtenida = evento.target.dataset.categoria;
+
+    const listaFiltrada = categoriaObtenida === "todos" ? catalogo : catalogo.filter((c) => c.categoria === categoriaObtenida);
+
+    pintarCatalogo(listaFiltrada)
 })
 cargarCatalogo();
 pintarCarrito();

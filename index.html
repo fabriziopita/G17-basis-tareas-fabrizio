@@ -10,7 +10,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script type="module" src="./js/main.js"></script>
   <style type="text/tailwindcss">
-    @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+    @custom-variant dark (&:where(.dark, .dark *));
     
     @theme {
       --color-marca:        #12c79a;
@@ -43,7 +43,7 @@
       --container-ancha:  1280px;
     }
 
-    [data-theme="dark"]  {
+    .dark  {
         --color-marca:        #00e6b8;
         --color-sobre-marca:  #071512;
         --color-exito:        #39ff88;
@@ -116,12 +116,16 @@
         <!-- D2 - Sección de preguntas frecuentes con <summary> y <details> -->
         <li><a class="text-marca font-semibold no-underline hover:underline" href="#faq">Preguntas frecuentes</a></li>
       </ul>
-      <p id="resumen-carrito" class=""font-semibold m-0" role="status" aria-live="polite"></p>
+      <p  class=""font-semibold m-0" role="status" aria-live="polite"></p>
      </nav>
+
+    <button id="alternar-tema" class="boton inline-flex justify-end" type="button">
+        Alternar tema
+    </button>
 
     <button class="boton inline-flex items-center justify-center gap-2" type="button">
       Comprar
-      <span class="contador inline-flex items-center justify-center size-[22px] rounded-full bg-acento text-[#071512] text-sm">0</span>
+      <span id="resumen-carrito" class="contador inline-flex items-center justify-center size-[22px] rounded-full bg-acento text-[#071512] text-sm">0</span>
     </button>
   </header>
 
@@ -135,14 +139,15 @@
     <section id="categorias" class="flex flex-col items-center bg-tarjeta rounded-tarjeta p-4 mb-6">
       <h2 class="titulo-seccion">Categorías</h2>
       <h4 class="text-sm text-texto-suave my-2 before:content-['>_'] before:text-[1.1rem] before:mr-1">
-        Actualmente solo tenemos dispositivos Apple disponibles
+        Actualmente no tenemos accesorios de celulares disponibles disponibles
       </h4>
       <nav aria-label="Categorias">
         <ul class="flex flex-wrap justify-center gap-9">
-          <li><a class="text-marca font-semibold no-underline hover:underline" href="#catalogo">Apple</a></li>
-          <li><a class="text-marca font-semibold no-underline hover:underline" href="#catalogo">Samsung</a></li>
-          <li><a class="text-marca font-semibold no-underline hover:underline" href="#catalogo">Xiaomi</a></li>
-          <li><a class="text-marca font-semibold no-underline hover:underline" href="#catalogo">Lenovo</a></li>
+          <li><a class="text-marca font-semibold no-underline hover:underline" data-categoria="todos" href="#catalogo">Todos</a></li>
+          <li><a class="text-marca font-semibold no-underline hover:underline" data-categoria="laptops"  ="#catalogo">Laptops</a></li>
+          <li><a class="text-marca font-semibold no-underline hover:underline" data-categoria="smartphones" href="#catalogo">Smartphones</a></li>
+          <li><a class="text-marca font-semibold no-underline hover:underline" data-categoria="tablets" href="#catalogo">Tablets</a></li>
+          <li><a class="text-marca font-semibold no-underline hover:underline" data-categoria="mobile-accesories" href="#catalogo">Accesorios de celular</a></li>
         </ul>
       </nav>
     </section>
